@@ -1,4 +1,6 @@
 <?php
+ini_set('session.cookie_httponly', 1);
+session_start();
 require '../views/connexion.php';
 require_once '../SQL_Request/Select.php';
 
@@ -7,7 +9,6 @@ $password = htmlspecialchars($_POST['password']);
 $check = ConnectSelect($username, $password); // si check est à True, l'utilisateur peut être connecté
 
 if($check){
-    session_start();
     $_SESSION['username'] = $username;
     header('Location: ../views/dashboard.php');
     $connected = true;
