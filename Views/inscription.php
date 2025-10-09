@@ -1,4 +1,5 @@
 <?php
+require 'navbar.php';
 //require '../Controller/inscription.php';
 ?>
     <!DOCTYPE html>

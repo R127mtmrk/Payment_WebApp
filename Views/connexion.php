@@ -1,5 +1,6 @@
 <?php
-require '../Controller/connexion.php';
+require 'navbar.php';
+//require '../Controller/connexion.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
