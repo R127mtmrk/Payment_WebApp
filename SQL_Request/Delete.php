@@ -10,6 +10,26 @@ function DeleteAccount($username, $password) {
         $stmt->bindParam(':mdp', $password, PDO::PARAM_STR);
         try {
             if (!$stmt->execute()){
+                throw new PDOException("Erreur lors de la suppression de l'utilisateur");
+            }
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    } else {
+        throw new PDOException("Cette pseudo n'existe pas");
+    }
+}
+
+function DeleteTransaction($idTransac) {
+    $Transaction = SelectUserTransactions($idTransac);
+    if ($Transaction) {
+        $sql = "DELETE FROM transactions WHERE id_transac = :id_transac";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id_transac', $idTransac, PDO::PARAM_STR);
+        try {
+            if (!$stmt->execute()){
                 throw new PDOException("Erreur lors de l'inscription");
             }
             return true;
@@ -18,4 +38,5 @@ function DeleteAccount($username, $password) {
             return false;
         }
     }
+    return null;
 }
