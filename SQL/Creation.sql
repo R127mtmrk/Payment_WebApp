@@ -1,14 +1,20 @@
-CREATE DATABASE Payment_WebApp CHARACTER SET 'utf8mb4';
+DROP database IF EXISTS Payment_WebApp;
+CREATE DATABASE Payment_WebApp;
 USE Payment_WebApp;
 
 CREATE TABLE Debit_Cards (
     id_card INT UNSIGNED NOT NULL AUTO_INCREMENT,
     num_card CHAR(16) NOT NULL,
-);
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE Users (
     id_user INT UNSIGNED NOT NULL AUTO_INCREMENT,
     psd_user VARCHAR(50) NOT NULL,
+    mdp_user VARCHAR(50) NOT NULL,
     email_user VARCHAR(100) NOT NULL,
-    id_card_user
-);
+    id_card_user INT UNSIGNED,
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
+
+ALTER TABLE Users ADD CONSTRAINT fk_user_Debit_Cards
+    FOREIGN KEY (id_card_user) REFERENCES Debit_Cards (id_card);
