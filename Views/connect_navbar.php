@@ -23,6 +23,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <li>
                     <a href="../Controller/disconnected.php" class="under_ligne <?php if ($currentPage == '../Controller/disconnected.php') echo 'active'; ?>">Déconnexion</a>
                 </li>
+                <li>
+                    <a href="../Views/account_suppression.php" class="under_ligne <?php if ($currentPage == '../Views/account_suppression.php') echo 'active'; ?>">Supprimer mon compte</a>
+                </li>
             </ul>
         </nav>
     </div>
