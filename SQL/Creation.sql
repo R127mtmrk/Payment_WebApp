@@ -27,3 +27,10 @@ CREATE TABLE Transac (
     FOREIGN KEY (id_sender) REFERENCES  Users(id_user),
     FOREIGN KEY (id_receiver) REFERENCES  Users(id_user)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
+CREATE TABLE Roles (
+    id_roles INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    nom_role VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_roles),
+    FOREIGN KEY (id_roles) REFERENCES  Users(id_user)
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
