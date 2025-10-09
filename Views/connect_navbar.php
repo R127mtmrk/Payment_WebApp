@@ -18,7 +18,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <a href="dashboard.php" class="under_ligne <?php if ($currentPage == 'dashboard.php') echo 'active'; ?>">Dashboard</a>
                 </li>
                 <li>
-                    <a href="payer.php" class="under_ligne <?php if ($currentPage == 'payer.php') echo 'active'; ?>">Payer</a>
+                    <a href="Transaction.php" class="under_ligne <?php if ($currentPage == 'Transaction.php') echo 'active'; ?>">Transaction</a>
                 </li>
                 <li>
                     <a href="../Controller/disconnected.php" class="under_ligne <?php if ($currentPage == '../Controller/disconnected.php') echo 'active'; ?>">Déconnexion</a>

@@ -1,5 +1,5 @@
 <?php
-require 'disconnected_navbar.php';
+require 'disconnect_navbar.php';
 ?>
     <!DOCTYPE html>
     <html lang="fr">

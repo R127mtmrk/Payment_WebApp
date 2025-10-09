@@ -1,2 +1,2 @@
 <?php
-require 'connecte_navbar.php';
+require 'connect_navbar.php';
