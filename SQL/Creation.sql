@@ -8,29 +8,32 @@ CREATE TABLE Debit_Cards (
     PRIMARY KEY (id_card)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
+CREATE TABLE Roles (
+    id_role INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    nom_role VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_role),
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
 CREATE TABLE Users (
     id_user INT UNIQUE UNSIGNED NOT NULL AUTO_INCREMENT,
     psd_user UNIQUE VARCHAR(50) NOT NULL,
     mdp_user VARCHAR(50) NOT NULL,
     email_user UNIQUE VARCHAR(100) NOT NULL,
     id_card_user INT UNSIGNED,
+    role_user VARCHAR(50) NOT NULL,
     PRIMARY KEY (id_user),
+    FOREIGN KEY (role_user) REFERENCES  Roles(id_role),
     FOREIGN KEY (id_card_user) REFERENCES Debit_Cards(id_card)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE Transac (
     id_transac INT UNIQUE UNSIGNED NOT NULL AUTO_INCREMENT,
-    id_sender INT UNSIGNED NOT NULL,
-    id_receiver INT UNSIGNED NOT NULL,
-    sum_transac INT UNSIGNED NOT NULL,
+    id_sender INT UNSIGNED,
+    id_receiver INT UNSIGNED,
+    sum_transac INT UNSIGNED,
     PRIMARY KEY (id_transac),
     FOREIGN KEY (id_sender) REFERENCES  Users(id_user),
     FOREIGN KEY (id_receiver) REFERENCES  Users(id_user)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
-CREATE TABLE Roles (
-    id_role INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nom_role VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id_role),
-    FOREIGN KEY (id_role) REFERENCES  Users(id_user)
-) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
