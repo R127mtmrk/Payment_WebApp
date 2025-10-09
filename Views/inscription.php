@@ -1,5 +1,5 @@
 <?php
-require '../Controller/inscription.php';
+//require '../Controller/inscription.php';
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -7,7 +7,7 @@ require '../Controller/inscription.php';
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Inscription</title>
-        <!--  CSS <link rel="stylesheet" href=""> -->
+        <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
     <div class="container">
@@ -20,6 +20,10 @@ require '../Controller/inscription.php';
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="password_confirm">Confirme le mot de passe</label>
+                <input type="password" id="password_confirm" name="password_confirm" required>
             </div>
             <button type="submit">S'inscrire</button>
         </form>
