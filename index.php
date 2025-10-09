@@ -1,2 +1,2 @@
 <?php
-require 'Views/index.php';
+require 'Controller/index.php';

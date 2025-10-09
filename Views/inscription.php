@@ -15,7 +15,7 @@ require 'disconnect_navbar.php';
     <body>
     <div class="container">
         <h2>Inscription</h2>
-        <form action="index.php" method="POST">
+        <form action="../Controller/index.php" method="POST">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" id="username" name="username" required>
