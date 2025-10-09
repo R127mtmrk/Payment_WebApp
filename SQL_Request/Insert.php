@@ -1,6 +1,6 @@
 <?php
 require_once 'Select.php';
-function InsertInscription($username, $password, $email) {
+function InsertAccount($username, $password, $email) {
     $result = ConnectSelect($username, $password);
     if (!$result) {
         $sql = "INSERT INTO users (psd_username, email_user, mdp_user) VALUES :pseudo, :email, :mdp";

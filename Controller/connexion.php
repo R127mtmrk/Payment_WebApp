@@ -8,7 +8,7 @@ $username = htmlspecialchars($_POST['username']);
 $password = htmlspecialchars($_POST['password']);
 $check = ConnectSelect($username, $password); // si check est à True, l'utilisateur peut être connecté
 
-if($check){
+if ($check) {
     $_SESSION['username'] = $username;
     header('Location: ../views/dashboard.php');
     $connected = true;

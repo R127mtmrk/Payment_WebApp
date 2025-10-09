@@ -7,8 +7,8 @@ $mail = htmlspecialchars($_POST['mail']);
 $password = htmlspecialchars($_POST['password']);
 $password_confirm = htmlspecialchars($_POST['password_confirm']);
 
-if ($password != $password_confirm) {
-
+if ($password = $password_confirm) {
+    InsertAccount($username, $mail, $password);
 } else {
-
+    echo "Les mots de passe ne correspondent pas";
 }
