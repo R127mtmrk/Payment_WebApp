@@ -1,5 +1,2 @@
 <?php
-require 'pages/accueil.php';
-
-
-
+require 'Views/index.php';
