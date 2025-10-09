@@ -2,12 +2,6 @@ DROP DATABASE IF EXISTS Payment_WebApp;
 CREATE DATABASE Payment_WebApp;
 USE Payment_WebApp;
 
-CREATE TABLE Debit_Cards (
-    id_card INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    num_card CHAR(16) NOT NULL,
-    PRIMARY KEY (id_card)
-) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
-
 CREATE TABLE Roles (
     id_role INT UNSIGNED NOT NULL AUTO_INCREMENT,
     nom_role VARCHAR(50) NOT NULL,
@@ -22,8 +16,14 @@ CREATE TABLE Users (
     id_card_user INT UNSIGNED,
     role_user VARCHAR(50) NOT NULL,
     PRIMARY KEY (id_user),
-    FOREIGN KEY (role_user) REFERENCES  Roles(id_role),
+    FOREIGN KEY (role_user) REFERENCES Roles(id_role),
     FOREIGN KEY (id_card_user) REFERENCES Debit_Cards(id_card)
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
+CREATE TABLE Debit_Cards (
+    id_card INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    num_card CHAR(16) NOT NULL,
+    PRIMARY KEY (id_card)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE Transac (
@@ -31,6 +31,8 @@ CREATE TABLE Transac (
     id_sender INT UNSIGNED,
     id_receiver INT UNSIGNED,
     sum_transac INT UNSIGNED,
+    refund_transac BOOLEAN DEFAULT 0,
+    msg_transac LONGTEXT,
     PRIMARY KEY (id_transac),
     FOREIGN KEY (id_sender) REFERENCES  Users(id_user),
     FOREIGN KEY (id_receiver) REFERENCES  Users(id_user)
