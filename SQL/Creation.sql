@@ -22,8 +22,10 @@ CREATE TABLE Users (
 
 CREATE TABLE Debit_Cards (
     id_card INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id_user_card INT UNSIGNED,
     num_card CHAR(16) NOT NULL,
-    PRIMARY KEY (id_card)
+    PRIMARY KEY (id_card),
+    FOREIGN KEY (id_user_card) REFERENCES Users(id_user)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE Transac (
