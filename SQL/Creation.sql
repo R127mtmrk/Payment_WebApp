@@ -2,22 +2,14 @@ DROP DATABASE IF EXISTS Payment_WebApp;
 CREATE DATABASE Payment_WebApp;
 USE Payment_WebApp;
 
-CREATE TABLE Roles (
-    id_role INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nom_role VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id_role),
-) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
-
 CREATE TABLE Users (
     id_user INT UNIQUE UNSIGNED NOT NULL AUTO_INCREMENT,
     psd_user UNIQUE VARCHAR(50) NOT NULL,
     mdp_user VARCHAR(50) NOT NULL,
     email_user UNIQUE VARCHAR(100) NOT NULL,
     id_card_user INT UNSIGNED,
-    role_user VARCHAR(50) NOT NULL,
+    role_user BOOLEAN NOT NULL DEFAULT 0,
     PRIMARY KEY (id_user),
-    FOREIGN KEY (role_user) REFERENCES Roles(id_role),
-    FOREIGN KEY (id_card_user) REFERENCES Debit_Cards(id_card)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE Debit_Cards (
