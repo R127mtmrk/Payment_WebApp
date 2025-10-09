@@ -15,7 +15,7 @@ CREATE TABLE Users (
     email_user UNIQUE VARCHAR(100) NOT NULL,
     id_card_user INT UNSIGNED,
     PRIMARY KEY (id_user),
-    FOREIGN KEY (id_card_user) REFERENCES Debit_Cards(id_card);
+    FOREIGN KEY (id_card_user) REFERENCES Debit_Cards(id_card)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE Transac (
@@ -25,5 +25,5 @@ CREATE TABLE Transac (
     sum_transac INT UNSIGNED NOT NULL,
     PRIMARY KEY (id_transac),
     FOREIGN KEY (id_sender) REFERENCES  Users(id_user),
-    FOREIGN KEY (id_receiver) REFERENCES  Users(id_user);
+    FOREIGN KEY (id_receiver) REFERENCES  Users(id_user)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
