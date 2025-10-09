@@ -48,3 +48,21 @@ function InsertTransaction($usernameSender, $usernameReceiver, $sumTransaction) 
 
     }
 }
+
+function InsertCard($user, $numCard, $expirationDate) {
+    $result = SelectUser($user);
+    $sql = "INSERT INTO Debit_Cards (num_card, id_user_card, expiration_date) VALUES :num_card, :id_user, :expiration_date";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':num_card', $numCard, PDO::PARAM_STR);
+    $stmt->bindParam(':id_user', $result['id_user'], PDO::PARAM_STR);
+    $stmt->bindParam(':expiration_date', $expirationDate, PDO::PARAM_STR);
+    try {
+        if (!$stmt->execute()){
+            throw new PDOException("Erreur lors de la transaction");
+        }
+        return true;
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+    }
+}

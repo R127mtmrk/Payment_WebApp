@@ -16,6 +16,7 @@ CREATE TABLE Debit_Cards (
     id_card INT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_user_card INT UNSIGNED,
     num_card CHAR(16) NOT NULL,
+    expiration_date CHAR(4) NOT NULL ,
     PRIMARY KEY (id_card),
     FOREIGN KEY (id_user_card) REFERENCES Users(id_user)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
@@ -27,6 +28,7 @@ CREATE TABLE Transac (
     sum_transac INT UNSIGNED,
     refund_transac BOOLEAN DEFAULT 0,
     msg_transac LONGTEXT,
+    date_transac DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id_transac),
     FOREIGN KEY (id_sender) REFERENCES  Users(id_user),
     FOREIGN KEY (id_receiver) REFERENCES  Users(id_user)
