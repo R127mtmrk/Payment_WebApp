@@ -1,6 +1,5 @@
 <?php
-require 'navbar.php';
-//require '../Controller/inscription.php';
+require 'disconnected_navbar.php';
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -17,6 +16,10 @@ require 'navbar.php';
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="usermail">Adresse mail</label>
+                <input type="email" id="usermail" name="usermail" required>
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>

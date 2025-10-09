@@ -1,5 +1,5 @@
 <?php
-
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,19 +15,10 @@
             <nav>
                 <ul class="menu">
                     <li>
-                        <a href="index.php" class="under_ligne active">Accueil</a>
+                        <a href="connexion.php" class="under_ligne <?php if ($currentPage == 'connexion.php') echo 'active'; ?>">Connexion</a>
                     </li>
                     <li>
-                        <a href="connexion.php" class="under_ligne">Connexion</a>
-                    </li>
-                    <li>
-                        <a href="inscription.php" class="under_ligne">Inscription</a>
-                    </li>
-                    <li>
-                        <a href="" class="under_ligne">Payer</a>
-                    </li>
-                    <li>
-                        <a href="" class="under_ligne">Dasboard</a>
+                        <a href="inscription.php" class="under_ligne <?php if ($currentPage == 'inscription.php') echo 'active'; ?>">Inscription</a>
                     </li>
                 </ul>
             </nav>

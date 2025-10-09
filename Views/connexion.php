@@ -1,6 +1,5 @@
 <?php
-require 'navbar.php';
-//require '../Controller/connexion.php';
+require 'disconnected_navbar.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,7 +14,7 @@ require 'navbar.php';
     <h2>Connexion</h2>
     <form action="#" method="POST">
         <div class="form-group">
-            <label for="username">Nom d'utilisateur</label>
+            <label for="username">Nom d'utilisateur ou adresse mail</label>
             <input type="text" id="username" name="username" required>
         </div>
         <div class="form-group">
