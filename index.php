@@ -1,5 +1,5 @@
 <?php
-require 'pages/accueil.html';
+require 'pages/accueil.php';
 
 
 
