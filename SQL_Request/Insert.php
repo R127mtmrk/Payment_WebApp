@@ -7,7 +7,7 @@ function InsertAccount($username, $password, $email) {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':mdp', $password, PDO::PARAM_STR);
+        $stmt->bindParam(':mdp', hash('sha384',$password), PDO::PARAM_STR);
         try {
             if (!$stmt->execute()){
                 throw new PDOException("Erreur lors de l'inscription");

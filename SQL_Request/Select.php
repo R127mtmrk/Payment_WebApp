@@ -8,7 +8,8 @@ function ConnectSelect($username, $password) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result) {
-        if (password_verify($password, $result['psd_password'])) {
+        $hashPassword = hash('sha384',$password);
+        if ($hashPassword = $result['mdp_user']) {
             return true;
         } else {
             return false;
