@@ -15,7 +15,7 @@ require 'disconnect_navbar.php';
     <body>
     <div class="container">
         <h2>Connexion</h2>
-        <form action="#" method="POST">
+        <form action="index.php" method="POST">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur ou adresse mail</label>
                 <input type="text" id="username" name="username" required>
