@@ -6,7 +6,7 @@
     <title>Inscription</title>
     <link rel="stylesheet" href="../Views/assets/css/navbar.css">
     <link rel="stylesheet" href="../Views/assets/css/style.css">
-    <script defer src="../Views/assets/js/script.js"></script>
+    <script defer src="../Views/assets/js/inscription.js"></script>
 </head>
 <body>
 <?php include 'disconnect_navbar.php'; ?>
