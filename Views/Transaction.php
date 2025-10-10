@@ -12,8 +12,8 @@
 <div class="body-container">
     <div class="container">
 
-    <?php
-    // TODO : afficher les transactions
+        <?php
+    // TODO : Faire des transactions
     ?>
 
     </div>
