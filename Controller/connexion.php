@@ -6,8 +6,8 @@ if (!isset($_SESSION['connected']) || !function_exists($_SESSION['connected'])) 
     require '../views/connexion.php';
     require_once '../SQL_Request/Select.php';
 
-    $username = htmlspecialchars($_POST['username']);
-    $password = htmlspecialchars($_POST['password']);
+    $username = isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '';
+    $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
     $check = ConnectSelect($username, $password); // si check est à True, l'utilisateur peut être connecté
 
     if ($check) {

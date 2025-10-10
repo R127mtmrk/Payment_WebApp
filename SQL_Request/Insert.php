@@ -1,13 +1,15 @@
 <?php
 require_once 'Select.php';
 function InsertAccount($username, $password, $email) {
+    global $pdo;
     $result = ConnectSelect($username, $password);
     if (!$result) {
         $sql = "INSERT INTO users (psd_username, email_user, mdp_user) VALUES :pseudo, :email, :mdp";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':mdp', hash('sha384',$password), PDO::PARAM_STR);
+        $hashedPassword = hash('sha384', $password);
+        $stmt->bindParam(':mdp', $hashedPassword, PDO::PARAM_STR);
         try {
             if (!$stmt->execute()){
                 throw new PDOException("Erreur lors de l'inscription");
@@ -23,6 +25,7 @@ function InsertAccount($username, $password, $email) {
 }
 
 function InsertTransaction($usernameSender, $usernameReceiver, $sumTransaction) {
+    global $pdo;
     $resultSender = SelectUser($usernameSender);
     if ($resultSender) {
         $resultReceiver = SelectUser($usernameReceiver);
@@ -50,6 +53,7 @@ function InsertTransaction($usernameSender, $usernameReceiver, $sumTransaction) 
 }
 
 function InsertCard($user, $numCard, $expirationDate) {
+    global $pdo;
     $result = SelectUser($user);
     $sql = "INSERT INTO Debit_Cards (num_card, id_user_card, expiration_date) VALUES :num_card, :id_user, :expiration_date";
     $stmt = $pdo->prepare($sql);

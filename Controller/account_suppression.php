@@ -8,7 +8,7 @@ if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'])) {
     require '../views/account_suppression.php';
     require_once '../SQL_Request/Select.php';
 
-    $password = htmlspecialchars($_POST['password']);
+    $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
     DeleteAccount($_SESSION['username'], $password);
 
     }else{
