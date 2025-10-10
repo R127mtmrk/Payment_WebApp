@@ -2,9 +2,6 @@
 const password_create = document.getElementById("password_create");
 const password_confirm = document.getElementById("password_confirm");
 const submitBtn = document.querySelector("button[type='submit']");
-const message = document.createElement("p");
-message.style.color = "red";
-password_create.parentNode.appendChild(message);
 
 const passwordMessage = document.createElement("p");
 passwordMessage.style.color = "red";
@@ -16,11 +13,11 @@ password_confirm.parentNode.appendChild(confirmMessage);
 
 function validatePassword() {
     const pwd = password_create.value;
-    // 8 caractères, au moins une lettre en majuscule, un chiffre et un caractère spécial
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    // 8 caractères, au moins une lettre en majuscule et minuscule, un chiffre et un caractère spécial
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
 
     if (!passwordRegex.test(pwd)) {
-        passwordMessage.textContent = "Le mot de passe doit contenir au moins 8 caractères, dont une lettre, un chiffre, et un caractère spécial.";
+        passwordMessage.textContent = "Le mot de passe doit contenir au moins 8 caractères, dont une lettre majuscule et minuscule, un chiffre et un caractère spécial.";
     } else {
         passwordMessage.textContent = "";
         return true;
