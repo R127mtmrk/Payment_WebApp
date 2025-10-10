@@ -6,6 +6,7 @@
     <title>Ajouter une carte</title>
     <link rel="stylesheet" href="../Views/assets/css/navbar.css">
     <link rel="stylesheet" href="../Views/assets/css/style.css">
+    <script defer src="../Views/assets/js/add_card.js"></script>
 </head>
 <body>
 <?php include 'connect_navbar.php'; ?>
