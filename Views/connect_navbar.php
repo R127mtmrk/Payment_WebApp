@@ -17,6 +17,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <li>
                     <a href="../Controller/account_suppression.php" class="under_ligne <?php if ($currentPage === '../Controller/account_suppression.php') echo 'active'; ?>">Supprimer mon compte</a>
                 </li>
+                <li>
+                    <a href="../Controller/add_card.php" class="under_ligne <?php if ($currentPage === '../Controller/add_card.php') echo 'active'; ?>">Ajouter une carte</a>
+                </li>
             </ul>
         </nav>
     </div>

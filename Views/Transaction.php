@@ -11,10 +11,7 @@
 <?php include 'connect_navbar.php'; ?>
 <div class="body-container">
     <div class="container">
-
-        <?php
-    // TODO : Faire des transactions
-    ?>
+        <h2>Transaction</h2>
 
     </div>
 </div>
