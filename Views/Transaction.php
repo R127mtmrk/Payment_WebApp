@@ -9,12 +9,14 @@
 </head>
 <body>
 <?php include 'connect_navbar.php'; ?>
-<div class="container">
+<div class="body-container">
+    <div class="container">
 
-<?php
-// TODO : afficher les transactions
-?>
+    <?php
+    // TODO : afficher les transactions
+    ?>
 
+    </div>
 </div>
 </body>
 </html>

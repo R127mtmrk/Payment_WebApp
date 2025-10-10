@@ -9,12 +9,14 @@
 </head>
 <body>
 <?php include 'connect_navbar.php'; ?>
-<div class="container">
+<div class="body-container">
+    <div class="container">
 
-<?php
-// TODO : afficher le dashboard
-?>
+    <?php
+    // TODO : afficher le dashboard
+    ?>
 
+    </div>
 </div>
 </body>
 </html>
