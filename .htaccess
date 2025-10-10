@@ -1,1 +1,4 @@
 Require all granted
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|woff|woff2|ttf|svg)$">
+    Require all granted
+</FilesMatch>
