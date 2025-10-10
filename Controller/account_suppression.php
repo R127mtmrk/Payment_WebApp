@@ -5,7 +5,6 @@ session_start();
 
 if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'])) {
 
-    require '../Views/connect_navbar.php';
     require '../views/account_suppression.php';
     require_once '../SQL_Request/Select.php';
 

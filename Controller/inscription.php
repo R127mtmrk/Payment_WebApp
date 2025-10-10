@@ -4,7 +4,6 @@ session_start();
 
 if (!isset($_SESSION['connected']) || !function_exists($_SESSION['connected'])) {
 
-    require '../views/disconnect_navbar.php';
     require '../views/inscription.php';
     require '../SQL_Request/Insert.php';
 

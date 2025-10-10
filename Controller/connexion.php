@@ -3,7 +3,6 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 if (!isset($_SESSION['connected']) || !function_exists($_SESSION['connected'])) {
 
-    require '../Views/disconnect_navbar.php';
     require '../views/connexion.php';
     require_once '../SQL_Request/Select.php';
 

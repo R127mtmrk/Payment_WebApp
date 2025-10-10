@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    <link rel="stylesheet" href="../Views/assets/css/navbar.css">
     <link rel="stylesheet" href="../Views/assets/css/style.css">
 </head>
 <body>
+<?php include 'disconnect_navbar.php'; ?>
 <div class="container">
     <h2>Connexion</h2>
     <form action="../index.php" method="POST">
