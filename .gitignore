@@ -1,0 +1,2 @@
+#ignore la connextion a la BDD
+./SQL_Request/Core/DB_Connect.php
