@@ -1,16 +1,10 @@
-<?php
-ini_set('session.cookie_httponly', 1);
-session_start();
-if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'])) {
-require 'connect_navbar.php';
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../Views/assets/css/style.css">
 </head>
 <body>
 <div class="container">
@@ -25,10 +19,3 @@ require 'connect_navbar.php';
 </div>
 </body>
 </html>
-<?php
-}else{
-// Envoi du header 404 Not Found
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>404 Not Found</h1><p>La ressource demandée est introuvable.</p>";
-    exit();
-}
