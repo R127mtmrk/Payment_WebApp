@@ -8,3 +8,6 @@ A faire :
     A noter qu'on a besoin de tous les numéros de la carte, de la date d'expiration et du CVV pour effectuer concrètement un paiement. En revanche, un numéro d'identification du paiement est suffisant pour générer un remboursement sur la transaction.
     Un utilisateur peut envoyer un message avec son paiement. Ce message doit laisser à l'utilisateur la possibilité de mettre en forme : gras, italique, couleurs, etc.
     Les messages pourront être consultés par un administrateur
+    
+    Securise le js
+    

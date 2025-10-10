@@ -6,6 +6,7 @@
     <title>Inscription</title>
     <link rel="stylesheet" href="../Views/assets/css/navbar.css">
     <link rel="stylesheet" href="../Views/assets/css/style.css">
+    <script defer src="../Views/assets/js/script.js"></script>
 </head>
 <body>
 <?php include 'disconnect_navbar.php'; ?>
@@ -22,8 +23,8 @@
                 <input type="email" id="usermail" name="usermail" required>
             </div>
             <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password_create">Mot de passe</label>
+                <input type="password" id="password_create" name="password_create" required>
             </div>
             <div class="form-group">
                 <label for="password_confirm">Confirme le mot de passe</label>

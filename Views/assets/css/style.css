@@ -22,6 +22,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 /* Titres */
@@ -109,3 +110,11 @@ p a:focus {
         max-width: 320px;
     }
 }
+
+button:disabled {
+    background-color: #ccc; /* gris clair */
+    color: #666;            /* texte gris foncé */
+    cursor: not-allowed;    /* curseur interdit */
+    opacity: 0.6;           /* un peu transparent */
+}
+

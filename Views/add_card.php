@@ -21,11 +21,7 @@
                 <label for="expiry_date">Date d'expiration (MM/AA)</label>
                 <input type="text" id="expiry_date" name="expiry_date" pattern="(0[1-9]|1[0-2])\/\d{2}" title="La date d'expiration doit être au format MM/AA." required>
             </div>
-            <div class="form-group">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" pattern="\d{3}" title="Le CVV doit contenir 3 chiffres." required>
-            </div>
-            
+
             <button type="submit">Envoyer</button>
         </form>
     </div>
