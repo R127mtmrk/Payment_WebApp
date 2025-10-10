@@ -9,20 +9,22 @@
 </head>
 <body>
 <?php include 'disconnect_navbar.php'; ?>
-<div class="container">
-    <h2>Connexion</h2>
-    <form action="../index.php" method="POST">
-        <div class="form-group">
-            <label for="username">Nom d'utilisateur ou adresse mail</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">Se connecter</button>
-    </form>
-    <p>Pas encore de compte ? <a href="../Controller/inscription.php">Inscrivez-vous ici</a></p>
+<div class="body-container">
+    <div class="container">
+        <h2>Connexion</h2>
+        <form action="../index.php" method="POST">
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur ou adresse mail</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Se connecter</button>
+        </form>
+        <p>Pas encore de compte ? <a href="../Controller/inscription.php">Inscrivez-vous ici</a></p>
+    </div>
 </div>
 </body>
 </html>

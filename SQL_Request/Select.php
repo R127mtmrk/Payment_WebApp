@@ -1,6 +1,7 @@
 <?php
 require_once 'Core/DbConnect.php';
 function ConnectSelect($username, $password) {
+    global $pdo;
     $sql = "SELECT psd_username, email_user, mdp_user FROM Users WHERE psd_user = :username OR email_user = :username";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -19,6 +20,7 @@ function ConnectSelect($username, $password) {
 }
 
 function SelectUser($username) {
+    global $pdo;
     $sql = "SELECT * FROM Users WHERE psd_user = :username OR email_user = :username";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -28,6 +30,7 @@ function SelectUser($username) {
 }
 
 function SelectAllTransaction($maxReturn) {
+    global $pdo;
     if ($maxReturn > 0) {
         $sql = "SELECT * FROM Transac LIMIT :maxReturn";
         $stmt = $pdo->prepare($sql);
@@ -41,6 +44,7 @@ function SelectAllTransaction($maxReturn) {
 }
 
 function SelectUserTransactions($username) {
+    global $pdo;
     if ($username) {
         $sql = "SELECT * FROM Transac WHERE psd_user = :username";
         $stmt = $pdo->prepare($sql);
@@ -53,6 +57,7 @@ function SelectUserTransactions($username) {
     }
 }
 function SelectDailyTransaction() {
+    global $pdo;
     $sql = "SELECT * FROM Transac WHERE DATE(date) = CURDATE()";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -60,6 +65,7 @@ function SelectDailyTransaction() {
     return $result;
 }
 function SelectMonthlyTransaction() {
+    global $pdo;
     $sql = "SELECT * FROM Transac WHERE MONTH(date) = MONTH(CURDATE())";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -67,6 +73,7 @@ function SelectMonthlyTransaction() {
     return $result;
 }
 function SelectYearlyTransaction() {
+    global $pdo;
     $sql = "SELECT * FROM Transac WHERE YEAR(date) = YEAR(CURDATE())";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();

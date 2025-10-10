@@ -1,20 +1,17 @@
 <?php
-require_once '../SQL_Request/Delete.php';
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_lifetime', 0);
 session_start();
-
 if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'])) {
 
-    require '../views/account_suppression.php';
-    require_once '../SQL_Request/Select.php';
+    require '../Views/add_card.php';
+    $card_number = isset($_POST['card_number']) ? htmlspecialchars($_POST['card_number']) : '';
+    $expiry_date = isset($_POST['expiry_date']) ? htmlspecialchars($_POST['expiry_date']) : '';
+    $cvv = isset($_POST['cvv']) ? htmlspecialchars($_POST['cvv']) : '';
 
-    $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
-    DeleteAccount($_SESSION['username'], $password);
-
-    }else{
+} else {
     // Envoi du header 404 Not Found
     require '../Views/404.php';
 }

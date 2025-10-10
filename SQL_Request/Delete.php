@@ -1,6 +1,7 @@
 <?php
 require_once 'Select.php';
 function DeleteAccount($username, $password) {
+    global $pdo;
     $result = ConnectSelect($username, $password);
     if ($result) {
         $sql = "DELETE FROM users WHERE (psd_user = :pseudo OR email_user = :email) AND mdp_user = :mdp";
@@ -23,6 +24,7 @@ function DeleteAccount($username, $password) {
 }
 
 function DeleteTransaction($idTransac) {
+    global $pdo;
     $Transaction = SelectUserTransactions($idTransac);
     if ($Transaction) {
         $sql = "DELETE FROM transactions WHERE id_transac = :id_transac";
