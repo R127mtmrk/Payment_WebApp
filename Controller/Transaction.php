@@ -1,7 +1,10 @@
 <?php
 require_once 'cookie_param.php';
 session_start();
-if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'])) {
+
+$message_transact = isset($_POST['message_transact']) ? htmlspecialchars($_POST['message_transact']) : '';
+
+if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'] === true)) {
 
     require '../Views/transaction.php';
 

@@ -2,7 +2,7 @@
 require_once 'cookie_param.php';
 session_start();
 
-if (!isset($_SESSION['connected']) || !function_exists($_SESSION['connected'])) {
+if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'] === true)) {
 
     require '../views/inscription.php';
     require '../SQL_Request/Insert.php';
