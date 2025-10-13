@@ -1,7 +1,8 @@
 <?php
 require_once 'cookie_param.php';
 session_start();
-if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'] === true)) {
+
+if (!isset($_SESSION['connected']) || function_exists($_SESSION['connected'] !== true)) {
 
     require '../views/connexion.php';
     require_once '../SQL_Request/Select.php';
