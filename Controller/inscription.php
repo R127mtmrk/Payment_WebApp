@@ -1,5 +1,6 @@
 <?php
 require_once 'cookie_param.php';
+require_once 'function.php';
 session_start();
 
 if (!isset($_SESSION['connected']) || function_exists($_SESSION['connected'] !== true)) {
@@ -12,13 +13,8 @@ if (!isset($_SESSION['connected']) || function_exists($_SESSION['connected'] !==
     $password_create = isset($_POST['password_create']) ? htmlspecialchars($_POST['password']) : '';
     $password_confirm = isset($_POST['password_confirm']) ? htmlspecialchars($_POST['password_confirm']) : '';
 
-    function validerMotDePasse($mdp) :int
-    {
-        $pattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/';
-        return preg_match($pattern, $mdp);
-    }
 
-    if (validerMotDePasse($password_create)){
+    if (passwordStrong($password_create)){
 
         if ($password_create === $password_confirm) {
             InsertAccount($username, $mail, $password_create);
