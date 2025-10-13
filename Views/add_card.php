@@ -16,11 +16,11 @@
         <form method="POST" action="../index.php">
             <div class="form-group">
                 <label for="card_number">Numéro de carte</label>
-                <input type="text" id="card_number" name="card_number" pattern="\d{16}" title="Le numéro de carte doit contenir 16 chiffres." required>
+                <input type="text" id="card_number" name="card_number" required>
             </div>
             <div class="form-group">
                 <label for="expiry_date">Date d'expiration (MM/AA)</label>
-                <input type="text" id="expiry_date" name="expiry_date" pattern="(0[1-9]|1[0-2])\/\d{2}" title="La date d'expiration doit être au format MM/AA." required>
+                <input type="text" id="expiry_date" name="expiry_date" required>
             </div>
 
             <button type="submit">Envoyer</button>
