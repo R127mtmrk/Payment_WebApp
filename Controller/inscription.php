@@ -12,10 +12,22 @@ if (!isset($_SESSION['connected']) || function_exists($_SESSION['connected'] !==
     $password_create = isset($_POST['password_create']) ? htmlspecialchars($_POST['password']) : '';
     $password_confirm = isset($_POST['password_confirm']) ? htmlspecialchars($_POST['password_confirm']) : '';
 
-    if ($password_create === $password_confirm) {
-        InsertAccount($username, $mail, $password_create);
-    } else {
-        echo "Les mots de passe ne correspondent pas";
+    function validerMotDePasse($mdp) :int
+    {
+        $pattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/';
+        return preg_match($pattern, $mdp);
+    }
+
+    if (validerMotDePasse($password_create)){
+
+        if ($password_create === $password_confirm) {
+            InsertAccount($username, $mail, $password_create);
+        } else {
+            echo "Les mots de passe ne correspondent pas";
+        }
+
+    }else{
+        echo "Le mot de passe est pas assez sécurisé";
     }
 
     } else {
