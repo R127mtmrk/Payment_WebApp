@@ -4,11 +4,11 @@ function InsertAccount($username, $password, $email) {
     global $pdo;
     $result = ConnectSelect($username, $password);
     if (!$result) {
-        $sql = "INSERT INTO users (psd_username, email_user, mdp_user) VALUES :pseudo, :email, :mdp";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $hashedPassword = hash('sha384', $password);
+        $sql = "INSERT INTO users (psd_user, email_user, mdp_user) VALUES (:pseudo, :email, :mdp)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':pseudo', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':mdp', $hashedPassword, PDO::PARAM_STR);
         try {
             if (!$stmt->execute()){

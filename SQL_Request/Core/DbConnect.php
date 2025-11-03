@@ -1,6 +1,6 @@
 <?php
-$host = 'localhost:3308';
-$db   = 'Payment_WebApp';
+$host = 'localhost:3306';
+$db   = 'payment_webapp';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';

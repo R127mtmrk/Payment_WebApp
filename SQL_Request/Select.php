@@ -2,15 +2,22 @@
 require_once 'Core/DbConnect.php';
 function ConnectSelect($username, $password) {
     global $pdo;
-    $sql = "SELECT psd_username, email_user, mdp_user FROM Users WHERE psd_user = :username OR email_user = :username";
+    if (!$pdo) {
+        die('❌ ERREUR: la connexion PDO n\'est pas initialisée.');
+    }
+    $sql = "SELECT psd_user, email_user, mdp_user 
+        FROM Users 
+        WHERE psd_user = :username OR email_user = :email";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $username, PDO::PARAM_STR);
     $stmt->execute();
+
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result) {
         $hashPassword = hash('sha384',$password);
-        if ($hashPassword = $result['mdp_user']) {
+        if ($hashPassword == $result['mdp_user']) {
             return true;
         } else {
             return false;
@@ -32,9 +39,9 @@ function SelectUser($username) {
 function SelectAllTransaction($maxReturn) {
     global $pdo;
     if ($maxReturn > 0) {
-        $sql = "SELECT * FROM Transac LIMIT :maxReturn";
+        $maxReturn = (int)$maxReturn; // Sécurise la valeur
+        $sql = "SELECT * FROM Transac LIMIT $maxReturn";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':maxReturn', $maxReturn, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
