@@ -12,9 +12,9 @@
 <div class="body-container">
     <div class="container">
 
-    <?php
-    // TODO : afficher le dashboard
-    ?>
+        <?php
+        // TODO : afficher le dashboard admin
+        ?>
 
     </div>
 </div>
