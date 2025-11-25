@@ -1,26 +1,22 @@
 <?php
 require_once 'Select.php';
-function InsertAccount($username, $password, $email) {
+
+function InsertAccount(string $username, string $email, string $password): bool {
     global $pdo;
-    $result = ConnectSelect($username, $password);
-    if (!$result) {
-        $hashedPassword = hash('sha384', $password);
-        $sql = "INSERT INTO users (psd_user, email_user, mdp_user) VALUES (:pseudo, :email, :mdp)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':pseudo', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':mdp', $hashedPassword, PDO::PARAM_STR);
-        try {
-            if (!$stmt->execute()){
-                throw new PDOException("Erreur lors de l'inscription");
-            }
-            return true;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    } else {
-        echo "Cette personne existe déjà !";
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO Users (psd_user, email_user, mdp_user) VALUES (:pseudo, :email, :mdp)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':pseudo', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':mdp', $hashedPassword, PDO::PARAM_STR);
+
+    try {
+        return $stmt->execute();
+    } catch (PDOException $e) {
+    error_log($e->getMessage());
+        return false;
     }
 }
 

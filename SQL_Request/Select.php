@@ -87,3 +87,16 @@ function SelectYearlyTransaction() {
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+
+// Nouvelle fonction pour vérifier si un User ou Email existe déjà (sans vérifier le mot de passe)
+function CheckUserExists($username, $email) {
+    global $pdo;
+    $sql = "SELECT id_user FROM Users WHERE psd_user = :username OR email_user = :email";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+
+    // Renvoie true si une ligne est trouvée, sinon false
+    return $stmt->fetch() !== false;
+}
