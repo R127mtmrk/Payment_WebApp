@@ -10,9 +10,13 @@ function ConnectSelect($username, $password) {
 
     $sql = "SELECT id_user, psd_user, email_user, mdp_user 
             FROM Users 
-            WHERE psd_user = :username OR email_user = :username";
+            WHERE psd_user = :psd OR email_user = :mail";
+
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+    $stmt->bindParam(':psd', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':mail', $username, PDO::PARAM_STR);
+
     $stmt->execute();
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);

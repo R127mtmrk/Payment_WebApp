@@ -12,7 +12,14 @@
 <div class="body-container">
     <div class="container">
         <h2>Connexion</h2>
-        <form action="../index.php" method="POST">
+
+        <?php if (!empty($errorMessage)): ?>
+            <div class="alert error">
+                <?= $errorMessage; ?>
+            </div>
+        <?php endif; ?>
+
+        <form action="" method="POST">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur ou adresse mail</label>
                 <input type="text" id="username" name="username" required>

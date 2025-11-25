@@ -1,25 +1,35 @@
 <?php
 require_once 'cookie_param.php';
+require_once '../SQL_Request/Select.php';
 session_start();
-if (!isset($_SESSION['connected']) || $_SESSION['connected'] !== true) {
-    require '../views/connexion.php';
-    require_once '../SQL_Request/Select.php';
+
+$errorMessage = "";
+
+if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
+    header('Location: ../views/dashboard.php');
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $username = isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '';
-    $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
-    $check = ConnectSelect($username, $password); // si check est à True, l'utilisateur peut être connecté
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    if ($check) {
+    $user = ConnectSelect($username, $password);
+
+    if ($user) {
         session_regenerate_id(true);
-        $_SESSION['username'] = $username;
-        header('Location: ../views/dashboard.php');
-        $connected = true;
-        $_SESSION['connected'] = $connected;
-    } else {
-        echo "Nom d'utilisateur ou mot de passe incorrect.";
-    }
 
+        $_SESSION['connected'] = true;
+        $_SESSION['username'] = $user['psd_user'];
+        $_SESSION['id_user'] = $user['id_user'];
+
+        header('Location: ../views/dashboard.php');
+        exit();
     } else {
-    // Envoi du header 404 Not Found
-    require '../Views/404.php';
+        $errorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
+    }
 }
+
+require '../views/connexion.php';
+?>
