@@ -1,44 +1,49 @@
 <?php
 require_once 'Select.php';
+
 function DeleteAccount($username, $password) {
     global $pdo;
-    $result = ConnectSelect($username, $password);
-    if ($result) {
-        $sql = "DELETE FROM users WHERE (psd_user = :pseudo OR email_user = :email) AND mdp_user = :mdp";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':mdp', $password, PDO::PARAM_STR);
-        try {
-            if (!$stmt->execute()){
-                throw new PDOException("Erreur lors de la suppression de l'utilisateur");
+
+    $user = SelectUser($username);
+
+    if ($user) {
+        if (password_verify($password, $user['mdp_user'])) {
+
+            $sql = "DELETE FROM Users WHERE id_user = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':id', $user['id_user'], PDO::PARAM_INT);
+
+            try {
+                if ($stmt->execute()) {
+                    return true;
+                }
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
             }
-            return true;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
+        } else {
+            echo "Mot de passe incorrect.";
             return false;
         }
     } else {
-        throw new PDOException("Cette pseudo n'existe pas");
+        echo "Cet utilisateur n'existe pas.";
+        return false;
     }
+    return false;
 }
 
 function DeleteTransaction($idTransac) {
     global $pdo;
-    $Transaction = SelectUserTransactions($idTransac);
-    if ($Transaction) {
-        $sql = "DELETE FROM transactions WHERE id_transac = :id_transac";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id_transac', $idTransac, PDO::PARAM_STR);
-        try {
-            if (!$stmt->execute()){
-                throw new PDOException("Erreur lors de l'inscription");
-            }
-            return true;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
+
+    $sql = "DELETE FROM Transac WHERE id_transac = :id_transac";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id_transac', $idTransac, PDO::PARAM_INT);
+
+    try {
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
     }
-    return null;
 }
+?>
