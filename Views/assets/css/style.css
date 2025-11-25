@@ -155,3 +155,25 @@ button[name="btn_message"]:hover {
     margin-top: 3rem; /* espace au-dessus de la div, donc entre boutons et zone éditable */
 }
 
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px; /* Coins arrondis */
+    font-size: 14px;
+    text-align: center; /* Texte centré */
+    width: 100%;
+    box-sizing: border-box; /* Empêche le padding de casser la mise en page */
+}
+
+.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
