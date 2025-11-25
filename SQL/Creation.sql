@@ -6,7 +6,7 @@ USE Payment_WebApp;
 CREATE TABLE Users (
                        id_user INT UNSIGNED NOT NULL AUTO_INCREMENT,
                        psd_user VARCHAR(50) NOT NULL UNIQUE,
-                       mdp_user VARCHAR(50) NOT NULL,
+                       mdp_user VARCHAR(255) NOT NULL,
                        email_user VARCHAR(100) NOT NULL UNIQUE,
                        id_card_user INT UNSIGNED,
                        role_user BOOLEAN NOT NULL DEFAULT 0,
