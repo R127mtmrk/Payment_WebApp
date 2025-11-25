@@ -13,6 +13,19 @@
 <div class="body-container">
     <div class="container">
         <h2>Inscription</h2>
+
+        <?php if (!empty($errorMessage)): ?>
+            <div class="alert error">
+                <?= $errorMessage; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($successMessage)): ?>
+            <div class="alert success">
+                <?= $successMessage; ?>
+            </div>
+        <?php endif; ?>
+
         <form action="../index.php" method="POST">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
