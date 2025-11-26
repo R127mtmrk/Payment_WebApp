@@ -3,7 +3,7 @@ require_once '../SQL_Request/Delete.php';
 require_once 'cookie_param.php';
 session_start();
 
-if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'] === true)) {
+if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
 
     require '../views/account_suppression.php';
     require_once '../SQL_Request/Select.php';

@@ -2,7 +2,7 @@
 require_once 'cookie_param.php';
 require_once 'function.php';
 session_start();
-if (isset($_SESSION['connected']) && function_exists($_SESSION['connected'] === true)) {
+if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
 
     require '../Views/add_card.php';
     $card_number = isset($_POST['card_number']) ? htmlspecialchars($_POST['card_number']) : '';

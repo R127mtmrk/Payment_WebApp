@@ -1,7 +1,7 @@
 <?php
 require_once 'cookie_param.php';
-require_once 'function.php'; // Contient ta fonction passwordStrong
-require '../SQL_Request/Insert.php'; // Contient CheckUserExists et InsertAccount
+require_once 'function.php';
+require '../SQL_Request/Insert.php';
 
 session_start();
 
@@ -17,7 +17,6 @@ if (!isset($_SESSION['connected']) || $_SESSION['connected'] !== true) {
         $password_create = isset($_POST['password_create']) ? $_POST['password_create'] : '';
         $password_confirm = isset($_POST['password_confirm']) ? $_POST['password_confirm'] : '';
 
-
         if (empty($username) || empty($mail) || empty($password_create)) {
             $errorMessage = "Veuillez remplir tous les champs.";
         }
@@ -31,7 +30,6 @@ if (!isset($_SESSION['connected']) || $_SESSION['connected'] !== true) {
             $errorMessage = "Ce nom d'utilisateur ou cet email est déjà pris.";
         }
         else {
-            // Tout est bon, on tente l'insertion
             if (InsertAccount($username, $mail, $password_create)) {
                 $successMessage = "Inscription réussie ! Vous pouvez vous connecter.";
             } else {
@@ -45,4 +43,3 @@ if (!isset($_SESSION['connected']) || $_SESSION['connected'] !== true) {
 } else {
     require '../Views/404.php';
 }
-?>
