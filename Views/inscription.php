@@ -26,7 +26,7 @@
             </div>
         <?php endif; ?>
 
-        <form action="../index.php" method="POST">
+        <form action="" method="POST">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" id="username" name="username" required>
