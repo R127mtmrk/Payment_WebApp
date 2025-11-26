@@ -5,8 +5,9 @@ session_start();
 
 $errorMessage = "";
 
+
 if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
-    header('Location: ../views/dashboard.php');
+    header('Location: dashboard.php');
     exit();
 }
 
@@ -24,12 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $user['psd_user'];
         $_SESSION['id_user'] = $user['id_user'];
 
-        header('Location: ../views/dashboard.php');
+        header('Location: dashboard.php');
         exit();
     } else {
         $errorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
     }
 }
-
 require '../views/connexion.php';
-?>

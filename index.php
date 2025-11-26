@@ -10,4 +10,3 @@ if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
     header('Location: Controller/connexion.php');
     exit();
 }
-?>
