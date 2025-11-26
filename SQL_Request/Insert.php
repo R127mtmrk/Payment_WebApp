@@ -13,9 +13,10 @@ function InsertAccount(string $username, string $email, string $password): bool 
     $stmt->bindParam(':mdp', $hashedPassword, PDO::PARAM_STR);
 
     try {
-        return $stmt->execute();
+        $stmt->execute();
+        return true;
     } catch (PDOException $e) {
-        error_log($e->getMessage()); // Enregistre l'erreur dans les logs serveur
+        error_log($e->getMessage());
         return false;
     }
 }
@@ -63,4 +64,3 @@ function InsertCard($user, $numCard, $expirationDate) {
     }
     return false;
 }
-?>
