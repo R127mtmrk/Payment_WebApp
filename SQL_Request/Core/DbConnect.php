@@ -1,5 +1,5 @@
 <?php
-$host = 'localhost:3306';
+$host = 'localhost';
 $db   = 'payment_webapp';
 $user = 'root';
 $pass = '';
