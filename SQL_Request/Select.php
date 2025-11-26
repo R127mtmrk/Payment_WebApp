@@ -5,7 +5,7 @@ function ConnectSelect($username, $password) {
     global $pdo;
 
     if (!$pdo) {
-        die('❌ ERREUR: la connexion PDO n\'est pas initialisée.');
+        die('ERREUR: la connexion PDO n\'est pas initialisée.');
     }
 
     $sql = "SELECT id_user, psd_user, email_user, mdp_user 
@@ -67,6 +67,7 @@ function SelectUserTransactions($username) {
     global $pdo;
     if ($username) {
         $sql = "SELECT * FROM Transac WHERE psd_user = :username";
+        //TODO: Correction il faudra faire une jointure pour récupérer les transactions d'un utilisateur via son ID, pas son pseudo.
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
@@ -98,4 +99,3 @@ function SelectYearlyTransaction() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-?>
