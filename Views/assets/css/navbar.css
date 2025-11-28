@@ -1,25 +1,32 @@
+/* =========================================
+   VARIABLES & COULEURS
+   ========================================= */
 :root {
     --color-primary: navy;
     --color-secondary: black;
-    --color-text: black; /* Valeur par défaut pour le texte */
-    --color-background: white; /* Valeur par défaut  pour le fond */
-    --color-light-gray: #c8c8c8; /* Gris clair pour le fond */
-    --color-dark-gray: #2c2c2c; /* Gris sombre pour le fond sombre */
-    --color-loupe-bg: #lightgray; /* Gris clair pour le fond des SVG dans le thème clair */
-    --color-stat-bg: #c8c8c8; /* Gris clair pour le fond des SVG dans le thème clair */
+    --color-text: black;
+    --color-background: white;
+    --color-light-gray: #c8c8c8;
+    --color-dark-gray: #2c2c2c;
+    --color-loupe-bg: lightgray;
+    --color-stat-bg: #c8c8c8;
 }
 
+/* =========================================
+   HEADER PRINCIPAL
+   ========================================= */
 .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: var(--color-text);
     background-color: var(--color-background);
-    padding: 2rem 0;
+    padding: 1rem 0;
     position: sticky;
     top: 0;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /* Correction: 0px -> 0 */
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
     z-index: 1000;
 }
 
@@ -27,8 +34,13 @@
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
+/* =========================================
+   NAVIGATION (MENU)
+   ========================================= */
 .navbar {
     background-color: var(--color-background);
     width: 100%;
@@ -45,40 +57,48 @@
     list-style: none;
 }
 
+.menu li {
+    position: relative;
+}
+
 .menu li a {
     text-decoration: none;
     color: var(--color-text);
     font-weight: bold;
     position: relative;
+    padding: 5px 0;
 }
 
+/* =========================================
+   EFFET SOULIGNEMENT (Underline)
+   ========================================= */
 .under_ligne {
     color: black;
     text-decoration: none;
     position: relative;
+    display: inline-block;
 }
 
 .under_ligne::after {
     content: "";
-    background-color: darkblue;
+    background-color: var(--color-primary);
     position: absolute;
     width: 0;
     height: 3px;
-    margin-top: -2px;
+    bottom: 0;
+    left: 0;
     display: block;
-    transition: 0.5s;
+    transition: width 0.3s ease;
 }
 
 .under_ligne:hover::after,
 .under_ligne.active::after {
     width: 100%;
-    transition: 0.75s;
 }
 
-.menu li {
-    position: relative;
-}
-
+/* =========================================
+   SOUS-MENU (Sub-menu)
+   ========================================= */
 .menu li .sub-menu {
     list-style: none;
     padding: 0 1.5rem;
@@ -88,29 +108,35 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--color-background);
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 3px;
     height: 0;
     overflow: hidden;
-    transition: 0.75s;
+    transition: height 0.3s ease, padding 0.3s ease;
     margin-top: 5px;
-    max-width: 75px;
-    word-break: break-all;
+    min-width: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 4px 4px;
 }
 
 .menu li:hover .sub-menu {
     height: auto;
-    padding: 0.5rem 1.5rem;
-    align-items: center;
+    padding: 0.5rem 1rem;
+    border-top: 3px solid var(--color-primary);
 }
 
-@media screen and (max-width: 768px) {
-    .site-header .menu {
-        display: none;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-    .site-header .menu.active {
-        display: flex;
-    }
+.menu li .sub-menu li {
+    width: 100%;
+    text-align: center;
+}
+
+.menu li .sub-menu a {
+    font-size: 0.9rem;
+    font-weight: normal;
+    display: block;
+    padding: 5px 0;
+}
+
+.menu li .sub-menu a:hover {
+    color: var(--color-primary);
 }

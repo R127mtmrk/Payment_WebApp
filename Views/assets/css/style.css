@@ -1,14 +1,26 @@
-/* Style global et corps */
+/* =========================================
+   1. GLOBAL & LAYOUT
+   ========================================= */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f4f7f8;
     color: #333;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
 }
 
-/* Conteneur principal */
+/* Conteneur principal (centrage vertical et padding navbar) */
+.body-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 100px;
+    box-sizing: border-box;
+}
+
+/* Carte blanche standard (Connexion, Inscription, etc.) */
 .container {
     background: #fff;
     padding: 2rem 3rem;
@@ -18,14 +30,14 @@ body {
     width: 90%;
 }
 
-.body-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* Variante : Container large pour le Dashboard */
+.container.dashboard-width {
+    max-width: 900px;
 }
 
-/* Titres */
+/* =========================================
+   2. TYPOGRAPHIE & TITRES
+   ========================================= */
 h2 {
     font-weight: 700;
     color: #004d99;
@@ -33,7 +45,40 @@ h2 {
     text-align: center;
 }
 
-/* Groupe de formulaire */
+/* En-tête spécifique Dashboard (Titre à gauche, bouton à droite) */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+    text-align: left;
+}
+
+.user-greeting {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+p {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+p:empty {
+    display: none;
+}
+
+/* =========================================
+   3. FORMULAIRES & INPUTS
+   ========================================= */
 .form-group {
     margin-bottom: 1.25rem;
     display: flex;
@@ -46,26 +91,43 @@ label {
     color: #555;
 }
 
-/* Champs de formulaire */
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"],
+select {
+    width: 100%;
     padding: 0.75rem 1rem;
     font-size: 1rem;
     border: 2px solid #ddd;
     border-radius: 6px;
     transition: border-color 0.3s ease;
     outline: none;
+    box-sizing: border-box;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
+input:focus,
+select:focus {
     border-color: #007acc;
     background-color: #f9fcff;
 }
 
-/* Boutons */
+/* Inputs spécifiques pour Carte Bancaire */
+#expiry_date {
+    width: 120px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+#card_number {
+    letter-spacing: 2px;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+/* =========================================
+   4. BOUTONS & LIENS
+   ========================================= */
+/* Bouton Standard (Submit) */
 button {
     width: 100%;
     padding: 0.85rem;
@@ -84,44 +146,51 @@ button:focus {
     background-color: #005fa3;
 }
 
-/* Lien d'inscription */
-p {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-p a {
-    color: #007acc;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-p a:hover,
-p a:focus {
-    text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-    .container {
-        padding: 1.5rem 1.75rem;
-        max-width: 320px;
-    }
-}
-
 button:disabled {
-    background-color: #ccc; /* gris clair */
-    color: #666;            /* texte gris foncé */
-    cursor: not-allowed;    /* curseur interdit */
-    opacity: 0.6;           /* un peu transparent */
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
-p:empty {
-    display: none;
+/* Bouton Lien (ex: + Nouvelle Transaction) */
+a.btn-primary {
+    display: inline-block;
+    background-color: #007acc;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+a.btn-primary:hover {
+    background-color: #005fa3;
+    transform: translateY(-1px);
+}
+
+/* Bouton Remboursement (Admin) */
+.btn-refund {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    width: auto; /* Override du width 100% par défaut */
+    transition: background-color 0.3s;
+}
+
+.btn-refund:hover {
+    background-color: #c9302c;
+}
+
+/* Boutons de la Toolbar (Éditeur Message) */
 button[name="btn_message"] {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
@@ -131,6 +200,7 @@ button[name="btn_message"] {
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
+    width: auto; /* Override width */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -139,31 +209,40 @@ button[name="btn_message"]:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-#message_transact {
-    font-size: 18px;
-    background-color: #f7f7f7;
-    border: 1px solid #bbb;
-    padding: 15px;
-    min-height: 150px;
-    border-radius: 6px;
-    overflow-y: auto;
-    box-sizing: border-box;
-    margin-bottom: 15px;
+/* Liens texte simples */
+p a,
+.back-link {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: 600;
 }
 
-.editable-container {
-    margin-top: 3rem; /* espace au-dessus de la div, donc entre boutons et zone éditable */
+p a:hover,
+p a:focus,
+.back-link:hover {
+    text-decoration: underline;
 }
 
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* =========================================
+   5. ALERTES & MESSAGES
+   ========================================= */
 .alert {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
-    border-radius: 5px; /* Coins arrondis */
+    border-radius: 5px;
     font-size: 14px;
-    text-align: center; /* Texte centré */
+    text-align: center;
     width: 100%;
-    box-sizing: border-box; /* Empêche le padding de casser la mise en page */
+    box-sizing: border-box;
 }
 
 .error {
@@ -176,4 +255,181 @@ button[name="btn_message"]:hover {
     color: #155724;
     background-color: #d4edda;
     border-color: #c3e6cb;
+}
+
+.sys-msg {
+    color: #888;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.empty-row {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+}
+
+/* =========================================
+   6. TABLEAUX & DATA
+   ========================================= */
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.transac-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+.transac-table th,
+.transac-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.transac-table th {
+    background-color: #f9fcff;
+    color: #004d99;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #007acc;
+}
+
+.transac-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Styles de colonnes spécifiques */
+.amount-bold {
+    font-weight: 700;
+}
+
+.amount-debit {
+    color: #d9534f; /* Rouge */
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.card-info {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: #f4f7f8;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #555;
+    display: inline-block;
+    margin-bottom: 4px;
+    border: 1px solid #e1e4e8;
+}
+
+.card-exp {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.badge-refund {
+    display: inline-block;
+    background-color: #ffc107;
+    color: #333;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+.message-content {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    line-height: 1.4;
+    min-width: 200px;
+}
+
+/* =========================================
+   7. ÉDITEUR RICH TEXT (Message)
+   ========================================= */
+.toolbar {
+    background: #f4f4f4;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+button.btn-format {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size: 1rem;
+    font-weight: normal;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+button.btn-format:hover {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+#message_transact {
+    border: 1px solid #ccc;
+    padding: 15px;
+    min-height: 120px;
+    background: #fff;
+    border-radius: 0 0 6px 6px;
+    font-family: inherit;
+    line-height: 1.5;
+    outline: none;
+}
+
+#message_transact:focus {
+    border-color: #007acc;
+    background-color: #fafcff;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.helper-text {
+    color: #666; /* Gris par défaut */
+    font-size: 0.8em;
+    display: block;
+    margin-top: 5px;
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+
+.text-success {
+    color: #28a745 !important;
+    font-weight: bold;
+}
+
+.text-error {
+    color: #dc3545 !important;
 }
