@@ -4,7 +4,7 @@ require_once 'init.php';
 $successMessage = "";
 $errorMessage = "";
 
-redirectIfConnected();
+requireLogin();
 
 redirectIfAdmin();
 
