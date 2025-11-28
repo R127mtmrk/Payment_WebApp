@@ -15,5 +15,6 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    die('Erreur de connexion à la base : ' . $e->getMessage());
+    error_log($e->getMessage());
+    die('Erreur technique : Impossible de se connecter à la base de données.');
 }
