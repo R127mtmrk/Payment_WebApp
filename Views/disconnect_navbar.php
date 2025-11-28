@@ -6,10 +6,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <nav>
             <ul class="menu">
                 <li>
-                    <a href="../Controller/connexion.php" class="under_ligne <?php if ($currentPage === 'connexion.php') echo 'active'; ?>">Connexion</a>
+                    <a href="../Controller/connexion.php" class="under_ligne <?php if ($currentPage === 'connexion.php') { echo 'active'; } ?>">Connexion</a>
                 </li>
                 <li>
-                    <a href="../Controller/inscription.php" class="under_ligne <?php if ($currentPage === 'inscription.php') echo 'active'; ?>">Inscription</a>
+                    <a href="../Controller/inscription.php" class="under_ligne <?php if ($currentPage === 'inscription.php') { echo 'active'; } ?>">Inscription</a>
                 </li>
             </ul>
         </nav>
