@@ -38,10 +38,16 @@ function ConnectSelect(string $username, string $password): array|bool {
 
 function SelectUser(string $username): array|bool {
     global $pdo;
-    $sql = "SELECT * FROM Users WHERE psd_user = :username OR email_user = :username";
+
+    $sql = "SELECT * FROM Users WHERE psd_user = :psd OR email_user = :mail";
+
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':username', $username);
+
+    $stmt->bindValue(':psd', $username);
+    $stmt->bindValue(':mail', $username);
+
     $stmt->execute();
+
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
