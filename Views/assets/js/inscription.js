@@ -1,45 +1,65 @@
-// Test les MDP correspondance et complexité
-const password_create = document.getElementById("password_create");
-const password_confirm = document.getElementById("password_confirm");
-const submitBtn = document.querySelector("button[type='submit']");
+document.addEventListener('DOMContentLoaded', function() {
 
-const passwordMessage = document.createElement("p");
-passwordMessage.style.color = "red";
-password_create.parentNode.appendChild(passwordMessage);
+    const form = document.getElementById('inscriptionForm');
+    const errorContainer = document.getElementById('jsErrorContainer');
 
-const confirmMessage = document.createElement("p");
-confirmMessage.style.color = "red";
-password_confirm.parentNode.appendChild(confirmMessage);
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('usermail');
+    const pwdInput = document.getElementById('password_create');
+    const confirmInput = document.getElementById('password_confirm');
 
-function validatePassword() {
-    const pwd = password_create.value;
-    // 8 caractères, au moins une lettre en majuscule et minuscule, un chiffre et un caractère spécial
+    const pwdHelper = document.getElementById('pwdHelper');
+    const confirmHelper = document.getElementById('confirmHelper');
+
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!passwordRegex.test(pwd)) {
-        passwordMessage.textContent = "Le mot de passe doit contenir au moins 8 caractères, dont une lettre majuscule et minuscule, un chiffre et un caractère spécial.";
-    } else {
-        passwordMessage.textContent = "";
-        return true;
-    }
-}
 
-function validateConfirm() {
-    if (password_create.value !== password_confirm.value) {
-        confirmMessage.textContent = "Les mots de passe ne sont pas identiques.";
-    } else {
-        confirmMessage.textContent = "";
-        return true;
-    }
-}
+    pwdInput.addEventListener('input', () => {
+        if (!passwordRegex.test(pwdInput.value)) {
+            pwdHelper.style.color = 'red';
+            pwdHelper.textContent = "8 car. min, 1 Maj, 1 min, 1 chiffre, 1 spécial.";
+        } else {
+            pwdHelper.style.color = 'green';
+            pwdHelper.textContent = "Mot de passe fort ✔";
+        }
+    });
 
-function validateForm() {
-    const pwdValid = validatePassword();
-    const confirmValid = validateConfirm();
-    submitBtn.disabled = !(pwdValid && confirmValid);
-}
+    confirmInput.addEventListener('input', () => {
+        if (confirmInput.value !== pwdInput.value) {
+            confirmHelper.textContent = "Les mots de passe ne correspondent pas.";
+        } else {
+            confirmHelper.textContent = "";
+        }
+    });
 
-password_create.addEventListener("input", validateForm);
-password_confirm.addEventListener("input", validateForm);
 
-submitBtn.disabled = true;
+    form.addEventListener('submit', function(e) {
+        let errors = [];
+
+        if (usernameInput.value.trim() === "") errors.push("Le nom d'utilisateur est requis.");
+        if (emailInput.value.trim() === "") errors.push("L'adresse email est requise.");
+        if (pwdInput.value === "") errors.push("Le mot de passe est requis.");
+
+        if (emailInput.value.trim() !== "" && !emailRegex.test(emailInput.value)) {
+            errors.push("L'adresse email n'est pas valide.");
+        }
+
+        if (!passwordRegex.test(pwdInput.value)) {
+            errors.push("Le mot de passe ne respecte pas les critères de sécurité.");
+        }
+
+        if (pwdInput.value !== confirmInput.value) {
+            errors.push("Les deux mots de passe ne sont pas identiques.");
+        }
+
+        if (errors.length > 0) {
+            e.preventDefault();
+            errorContainer.innerHTML = errors.join('<br>');
+            errorContainer.style.display = 'block';
+            window.scrollTo(0, 0);
+        } else {
+            errorContainer.style.display = 'none';
+        }
+    });
+});
