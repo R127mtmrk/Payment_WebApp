@@ -11,8 +11,22 @@ function dateExpiry($date) :int
     return preg_match($pattern, $date);
 }
 
-function passwordStrong($mdp) :int
-{
-    $pattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/';
-    return preg_match($pattern, $mdp);
+function redirectIfConnected(): void{
+    if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
+        header('Location: dashboard.php');
+        exit();
+    }
+}
+
+function requireLogin(): void{
+    if (!isset($_SESSION['connected']) || $_SESSION['connected'] !== true) {
+    header('Location: connexion.php');
+        exit();
+    }
+}
+function redirectIfAdmin(): void{
+    if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
+        header('Location: dashboard.php');
+        exit();
+    }
 }
