@@ -1,34 +1,39 @@
 <?php
-require_once 'cookie_param.php';
-require_once '../SQL_Request/Select.php';
-session_start();
+require_once 'init.php';
 
 $errorMessage = "";
 
+redirectIfConnected();
 
-if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
-    header('Location: dashboard.php');
-    exit();
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            die("Erreur CSRF : Requête non autorisée.");
+        }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Nettoyage des entrées
+        $username = trim($_POST['username'] ?? '');
+        $password = $_POST['password'] ?? '';
 
-    $username = isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
+        if (empty($username) || empty($password)) {
+            $errorMessage = "Veuillez remplir tous les champs.";
+        } else {
+            $user = ConnectSelect($username, $password);
 
-    $user = ConnectSelect($username, $password);
+            if ($user) {
+                session_regenerate_id(true);
 
-    if ($user) {
-        session_regenerate_id(true);
+                $_SESSION['connected'] = true;
+                $_SESSION['username'] = $user['psd_user'];
+                $_SESSION['id_user'] = $user['id_user'];
 
-        $_SESSION['connected'] = true;
-        $_SESSION['username'] = $user['psd_user'];
-        $_SESSION['id_user'] = $user['id_user'];
+                $_SESSION['admin'] = ($user['role_user'] === 1);
 
-        header('Location: dashboard.php');
-        exit();
-    } else {
-        $errorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
+                header('Location: dashboard.php');
+                exit();
+            } else {
+                $errorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
+            }
+        }
     }
-}
-require '../views/connexion.php';
+
+    require '../Views/connexion.php';
