@@ -10,6 +10,7 @@ CREATE TABLE Users (
                        email_user VARCHAR(100) NOT NULL UNIQUE,
                        id_card_user INT UNSIGNED,
                        role_user BOOLEAN NOT NULL DEFAULT 0,
+                       is_active BOOLEAN NOT NULL DEFAULT 1,
                        PRIMARY KEY (id_user)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
@@ -17,7 +18,10 @@ CREATE TABLE Users (
 CREATE TABLE Debit_Cards (
                              id_card INT UNSIGNED NOT NULL AUTO_INCREMENT,
                              id_user_card INT UNSIGNED,
-                             num_card CHAR(16) NOT NULL,
+                             num_card CHAR(4) NOT NULL,
+                             first_digits CHAR(4) NOT NULL,
+                             pan_encrypted VARBINARY(255) NOT NULL,
+                             pan_iv VARBINARY(255) NOT NULL,
                              expiration_date CHAR(4) NOT NULL,
                              PRIMARY KEY (id_card),
                              FOREIGN KEY (id_user_card) REFERENCES Users(id_user)
@@ -30,9 +34,14 @@ CREATE TABLE Transac (
                          id_receiver INT UNSIGNED,
                          sum_transac INT UNSIGNED,
                          refund_transac BOOLEAN DEFAULT 0,
+                         id_card_used INT UNSIGNED NULL,
                          msg_transac LONGTEXT,
                          date_transac DATETIME DEFAULT CURRENT_TIMESTAMP,
                          PRIMARY KEY (id_transac),
                          FOREIGN KEY (id_sender) REFERENCES Users(id_user),
+                         FOREIGN KEY (id_card_used) REFERENCES Debit_Cards(id_card),
                          FOREIGN KEY (id_receiver) REFERENCES Users(id_user)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
+-- crée un admin
+UPDATE Users SET role_user = 1 WHERE psd_user = 'admin';
