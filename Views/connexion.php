@@ -6,6 +6,7 @@
     <title>Connexion</title>
     <link rel="stylesheet" href="../Views/assets/css/navbar.css">
     <link rel="stylesheet" href="../Views/assets/css/style.css">
+    <script src="../Views/assets/js/connexion.js" defer></script>
 </head>
 <body>
 <?php include 'disconnect_navbar.php'; ?>
@@ -15,21 +16,27 @@
 
         <?php if (!empty($errorMessage)): ?>
             <div class="alert error">
-                <?= $errorMessage; ?>
+                <?= htmlspecialchars($errorMessage) ?>
             </div>
         <?php endif; ?>
 
-        <form action="" method="POST">
+        <div id="jsErrorContainer" class="alert error hidden"></div>
+
+        <form action="" method="POST" id="loginForm" novalidate>
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur ou adresse mail</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
             </div>
+
             <div class="form-group">
                 <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password">
             </div>
+
             <button type="submit">Se connecter</button>
         </form>
+
         <p>Pas encore de compte ? <a href="../Controller/inscription.php">Inscrivez-vous ici</a></p>
     </div>
 </div>
