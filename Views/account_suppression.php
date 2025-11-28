@@ -13,6 +13,7 @@
     <div class="container">
         <h2>Supprime votre compte</h2>
         <form action="#" method="POST">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required>
