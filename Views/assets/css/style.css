@@ -3,36 +3,34 @@
    ========================================= */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f7f8;
+    background: #f4f6f9;
     color: #333;
     margin: 0;
     padding: 0;
     min-height: 100vh;
 }
 
-/* Conteneur principal (centrage vertical et padding navbar) */
 .body-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    padding-top: 100px;
+    padding: 100px 20px 20px 20px;
     box-sizing: border-box;
 }
 
-/* Carte blanche standard (Connexion, Inscription, etc.) */
 .container {
     background: #fff;
     padding: 2rem 3rem;
     border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
     max-width: 400px;
-    width: 90%;
+    width: 100%;
+    margin: 0 auto;
 }
 
-/* Variante : Container large pour le Dashboard */
 .container.dashboard-width {
-    max-width: 900px;
+    max-width: 1100px;
 }
 
 /* =========================================
@@ -41,11 +39,10 @@ body {
 h2 {
     font-weight: 700;
     color: #004d99;
-    margin-bottom: 1.5rem;
+    margin: 0 0 1.5rem 0;
     text-align: center;
 }
 
-/* En-tête spécifique Dashboard (Titre à gauche, bouton à droite) */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -61,8 +58,9 @@ h2 {
 }
 
 .user-greeting {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #666;
+    font-weight: 500;
 }
 
 p {
@@ -76,6 +74,26 @@ p:empty {
     display: none;
 }
 
+p a,
+.back-link {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p a:hover,
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
 /* =========================================
    3. FORMULAIRES & INPUTS
    ========================================= */
@@ -83,6 +101,10 @@ p:empty {
     margin-bottom: 1.25rem;
     display: flex;
     flex-direction: column;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 2rem;
 }
 
 label {
@@ -112,7 +134,6 @@ select:focus {
     background-color: #f9fcff;
 }
 
-/* Inputs spécifiques pour Carte Bancaire */
 #expiry_date {
     width: 120px;
     text-align: center;
@@ -125,9 +146,8 @@ select:focus {
 }
 
 /* =========================================
-   4. BOUTONS & LIENS
+   4. BOUTONS
    ========================================= */
-/* Bouton Standard (Submit) */
 button {
     width: 100%;
     padding: 0.85rem;
@@ -148,12 +168,10 @@ button:focus {
 
 button:disabled {
     background-color: #ccc;
-    color: #666;
     cursor: not-allowed;
     opacity: 0.6;
 }
 
-/* Bouton Lien (ex: + Nouvelle Transaction) */
 a.btn-primary {
     display: inline-block;
     background-color: #007acc;
@@ -164,7 +182,7 @@ a.btn-primary {
     border-radius: 6px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-size: 1rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 a.btn-primary:hover {
@@ -172,25 +190,39 @@ a.btn-primary:hover {
     transform: translateY(-1px);
 }
 
-/* Bouton Remboursement (Admin) */
 .btn-refund {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
+    background-color: transparent;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: bold;
-    width: auto; /* Override du width 100% par défaut */
-    transition: background-color 0.3s;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
 }
 
 .btn-refund:hover {
-    background-color: #c9302c;
+    background-color: #dc3545;
+    color: white;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.25);
+    transform: translateY(-1px);
 }
 
-/* Boutons de la Toolbar (Éditeur Message) */
+.btn-refund:active {
+    transform: translateY(1px);
+}
+
+.btn-refund::before {
+    content: "↺";
+    margin-right: 6px;
+    font-weight: bold;
+}
+
 button[name="btn_message"] {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
@@ -200,35 +232,12 @@ button[name="btn_message"] {
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
-    width: auto; /* Override width */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: auto;
+    transition: background-color 0.3s ease;
 }
 
 button[name="btn_message"]:hover {
     background-color: #ddd;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Liens texte simples */
-p a,
-.back-link {
-    color: #007acc;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-p a:hover,
-p a:focus,
-.back-link:hover {
-    text-decoration: underline;
-}
-
-.back-link {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #666;
 }
 
 /* =========================================
@@ -237,7 +246,6 @@ p a:focus,
 .alert {
     padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid transparent;
     border-radius: 5px;
     font-size: 14px;
     text-align: center;
@@ -248,13 +256,13 @@ p a:focus,
 .error {
     color: #721c24;
     background-color: #f8d7da;
-    border-color: #f5c6cb;
+    border: 1px solid #f5c6cb;
 }
 
 .success {
     color: #155724;
     background-color: #d4edda;
-    border-color: #c3e6cb;
+    border: 1px solid #c3e6cb;
 }
 
 .sys-msg {
@@ -263,19 +271,41 @@ p a:focus,
     font-size: 0.8rem;
 }
 
-.empty-row {
-    text-align: center;
+.text-success {
+    color: #28a745 !important;
+    font-weight: bold;
+}
+
+.text-error {
+    color: #dc3545 !important;
+}
+
+.helper-text {
     color: #666;
+    font-size: 0.8em;
+    display: block;
+    margin-top: 5px;
     font-style: italic;
-    padding: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+#irréversible,
+#irreversible {
+    color: #dc3545;
+    font-weight: bold;
 }
 
 /* =========================================
-   6. TABLEAUX & DATA
+   6. TABLEAUX
    ========================================= */
 .table-responsive {
     overflow-x: auto;
     width: 100%;
+    border-radius: 8px;
+    border: 1px solid #eee;
 }
 
 .transac-table {
@@ -285,34 +315,36 @@ p a:focus,
     font-size: 0.95rem;
 }
 
-.transac-table th,
-.transac-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
 .transac-table th {
     background-color: #f9fcff;
     color: #004d99;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    padding: 15px;
+    text-align: left;
     border-bottom: 2px solid #007acc;
+}
+
+.transac-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
 }
 
 .transac-table tr:hover {
     background-color: #f8f9fa;
 }
 
-/* Styles de colonnes spécifiques */
 .amount-bold {
     font-weight: 700;
+    color: #2c3e50;
 }
 
 .amount-debit {
-    color: #d9534f; /* Rouge */
+    color: #d9534f;
     font-weight: 700;
     white-space: nowrap;
 }
@@ -325,13 +357,7 @@ p a:focus,
     font-size: 0.9rem;
     color: #555;
     display: inline-block;
-    margin-bottom: 4px;
     border: 1px solid #e1e4e8;
-}
-
-.card-exp {
-    color: #888;
-    font-size: 0.85rem;
 }
 
 .badge-refund {
@@ -348,14 +374,26 @@ p a:focus,
 
 .message-content {
     font-size: 0.9rem;
-    color: #666;
+    color: #555;
     font-style: italic;
     line-height: 1.4;
     min-width: 200px;
 }
 
+.empty-row {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+}
+
+.aucune_transaction {
+    text-align: center;
+    padding: 20px;
+}
+
 /* =========================================
-   7. ÉDITEUR RICH TEXT (Message)
+   7. ÉDITEUR DE MESSAGE
    ========================================= */
 .toolbar {
     background: #f4f4f4;
@@ -368,28 +406,22 @@ p a:focus,
     gap: 5px;
 }
 
-button.btn-format {
+.btn-format {
     width: 36px;
     height: 36px;
-    padding: 0;
-
     background-color: #fff;
     color: #333;
     border: 1px solid #ccc;
     border-radius: 4px;
-
-    font-size: 1rem;
-    font-weight: normal;
-
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    cursor: pointer;
+    font-size: 1rem;
 }
 
-button.btn-format:hover {
+.btn-format:hover {
     background-color: #e6e6e6;
-    border-color: #adadad;
 }
 
 #message_transact {
@@ -401,6 +433,8 @@ button.btn-format:hover {
     font-family: inherit;
     line-height: 1.5;
     outline: none;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #message_transact:focus {
@@ -408,34 +442,153 @@ button.btn-format:hover {
     background-color: #fafcff;
 }
 
-.form-group:last-of-type {
-    margin-bottom: 2rem;
+/* =========================================
+   8. POP-UP MODALE (Confirmation)
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
 }
 
-.hidden {
-    display: none;
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
-.helper-text {
-    color: #666; /* Gris par défaut */
-    font-size: 0.8em;
-    display: block;
-    margin-top: 5px;
-    font-style: italic;
-    transition: color 0.3s ease;
+.modal-box {
+    background: white;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
 }
 
-.text-success {
-    color: #28a745 !important;
+.modal-overlay.active .modal-box {
+    transform: scale(1);
+}
+
+.modal-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-text {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
     font-weight: bold;
 }
 
-.text-error {
-    color: #dc3545 !important;
+.btn-cancel {
+    background: #f0f0f0;
+    color: #333;
 }
 
-#message_transact{
-    border: 1px solid #ccc;
-    min-height: 100px;
-    padding: 10px;
+.btn-cancel:hover {
+    background: #e0e0e0;
+}
+
+.btn-confirm {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-confirm:hover {
+    background: #b02a37;
+}
+
+.confirmer_remboursemnt {
+    display: contents;
+}
+
+/* =========================================
+   9. NOTIFICATIONS
+   ========================================= */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-left: 5px solid #ccc;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideIn 0.5s ease;
+    cursor: pointer;
+    min-width: 250px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast.success {
+    border-left-color: #28a745;
+}
+
+.toast.success div:first-child {
+    color: #28a745;
+    font-size: 1.2em;
+}
+
+.toast.error {
+    border-left-color: #dc3545;
+}
+
+.toast.error div:first-child {
+    color: #dc3545;
+    font-size: 1.2em;
 }

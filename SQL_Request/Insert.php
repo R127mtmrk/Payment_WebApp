@@ -132,7 +132,7 @@ function MakeRefund($idOriginalTransac): string|bool {
     $newReceiver = $original['id_sender'];
     $amount = $original['sum_transac'];
 
-    $message = "REMBOURSEMENT de la transaction #" . $original['id_transac'];
+    $message = "REMBOURSEMENT de la transaction";
 
     try {
         $pdo->beginTransaction();
