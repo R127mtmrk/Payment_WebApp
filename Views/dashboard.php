@@ -26,7 +26,9 @@
         </div>
 
         <?php if (empty($history)): ?>
-            <p class="empty-row">Aucune transaction effectuée pour le moment.</p>
+            <div class="empty-state">
+                <p>Aucune transaction effectuée pour le moment.</p>
+            </div>
         <?php else: ?>
             <div class="table-responsive">
                 <table class="transac-table">
@@ -46,6 +48,7 @@
 
                             <td>
                                 <?= htmlspecialchars($transac['receiver_name'] ?? 'Inconnu') ?>
+
                                 <?php if(isset($transac['refund_transac']) && (int)$transac['refund_transac'] === 1): ?>
                                     <br><span class="badge-refund">Remboursé</span>
                                 <?php endif; ?>
@@ -54,7 +57,7 @@
                             <td>
                                 <?php if (!empty($transac['num_card'])): ?>
                                     <span class="card-info">
-                                            <?= htmlspecialchars($transac['card_display_first']) ?>
+                                            <?= htmlspecialchars($transac['card_display_first'] ?? '****') ?>
                                             **** **** <?= htmlspecialchars($transac['num_card']) ?>
                                     </span>
                                     <br>
@@ -65,7 +68,15 @@
                             </td>
 
                             <td class="message-content">
-                                <?= htmlspecialchars($transac['msg_transac']) ?>
+                                <?php
+                                $allowed_tags = '<b><i><em><strong><font><br><p><span><div>';
+
+                                if (!empty($transac['msg_transac'])) {
+                                    echo strip_tags($transac['msg_transac'], $allowed_tags);
+                                } else {
+                                    echo '<span style="color: #ccc; font-style: italic;">Aucun message</span>';
+                                }
+                                ?>
                             </td>
 
                             <td class="amount-debit">

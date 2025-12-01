@@ -433,3 +433,9 @@ button.btn-format:hover {
 .text-error {
     color: #dc3545 !important;
 }
+
+#message_transact{
+    border: 1px solid #ccc;
+    min-height: 100px;
+    padding: 10px;
+}

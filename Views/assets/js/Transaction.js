@@ -1,69 +1,75 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    const form = document.getElementById('inscriptionForm');
+    // --- 1. RECUPERATION DES ELEMENTS ---
+    const form = document.getElementById('transactionForm');
+    const messageDiv = document.getElementById('message_transact'); // La div visuelle
+    const messageHidden = document.getElementById('message_input'); // L'input caché
     const errorContainer = document.getElementById('jsErrorContainer');
 
-    const usernameInput = document.getElementById('username');
-    const emailInput = document.getElementById('usermail');
-    const pwdInput = document.getElementById('password_create');
-    const confirmInput = document.getElementById('password_confirm');
+    // Champs de validation
+    const receiverInput = document.getElementById('receiver');
+    const amountInput = document.getElementById('amount');
+    const cardInput = document.getElementById('id_card');
+    const cvvInput = document.getElementById('cvv');
 
-    const pwdHelper = document.getElementById('pwdHelper');
-    const confirmHelper = document.getElementById('confirmHelper');
-
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    pwdInput.addEventListener('input', () => {
-        if (!passwordRegex.test(pwdInput.value)) {
-            pwdHelper.classList.remove('text-success');
-            pwdHelper.classList.add('text-error');
-            pwdHelper.textContent = "8 car. min, 1 Maj, 1 min, 1 chiffre, 1 spécial.";
-        } else {
-            pwdHelper.classList.remove('text-error');
-            pwdHelper.classList.add('text-success');
-            pwdHelper.textContent = "Mot de passe fort ✔";
-        }
-    });
-
-    confirmInput.addEventListener('input', () => {
-        if (confirmInput.value !== pwdInput.value) {
-            confirmHelper.textContent = "Les mots de passe ne correspondent pas.";
-            confirmHelper.classList.add('text-error');
-        } else {
-            confirmHelper.textContent = "";
-            confirmHelper.classList.remove('text-error');
-        }
-    });
-
-    form.addEventListener('submit', function(e) {
-        let errors = [];
-
-        if (usernameInput.value.trim() === "") errors.push("Le nom d'utilisateur est requis.");
-        if (emailInput.value.trim() === "") errors.push("L'adresse email est requise.");
-        if (pwdInput.value === "") errors.push("Le mot de passe est requis.");
-
-        if (emailInput.value.trim() !== "" && !emailRegex.test(emailInput.value)) {
-            errors.push("L'adresse email n'est pas valide.");
-        }
-
-        if (!passwordRegex.test(pwdInput.value)) {
-            errors.push("Le mot de passe ne respecte pas les critères de sécurité.");
-        }
-
-        if (pwdInput.value !== confirmInput.value) {
-            errors.push("Les deux mots de passe ne sont pas identiques.");
-        }
-
-        if (errors.length > 0) {
+    // --- 2. GESTION DE LA BARRE D'OUTILS (Gras, Italique...) ---
+    const buttons = document.querySelectorAll('.btn-format');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // Empêcher le bouton de soumettre le formulaire
             e.preventDefault();
-            errorContainer.innerHTML = errors.join('<br>');
-
-            errorContainer.classList.remove('hidden');
-
-            window.scrollTo(0, 0);
-        } else {
-            errorContainer.classList.add('hidden');
-        }
+            let cmd = btn.getAttribute('data-cmd');
+            let val = btn.getAttribute('data-val') || null;
+            document.execCommand(cmd, false, val);
+        });
     });
+
+    // --- 3. GESTION DE L'ENVOI DU FORMULAIRE ---
+    if (form) {
+        form.addEventListener('submit', function(e) {
+
+            let errors = [];
+
+            if (messageDiv && messageHidden) {
+                messageHidden.value = messageDiv.innerHTML;
+                console.log("Message copié pour l'envoi :", messageHidden.value); // Pour vérifier dans la console
+            }
+
+            if (receiverInput && receiverInput.value.trim() === "") {
+                errors.push("Le destinataire est requis.");
+            }
+
+            if (amountInput) {
+                let amountVal = parseFloat(amountInput.value.replace(',', '.'));
+                if (isNaN(amountVal) || amountVal <= 0) {
+                    errors.push("Le montant doit être valide et supérieur à 0.");
+                }
+            }
+
+            if (cardInput && cardInput.value === "") {
+                errors.push("Veuillez sélectionner une carte.");
+            }
+
+            if (cvvInput) {
+                const cvvRegex = /^\d{3,4}$/;
+                if (!cvvRegex.test(cvvInput.value)) {
+                    errors.push("Le CVV est invalide.");
+                }
+            }
+
+            if (errors.length > 0) {
+                e.preventDefault();
+
+                if (errorContainer) {
+                    errorContainer.innerHTML = errors.join('<br>');
+                    errorContainer.style.display = 'block';
+                }
+                window.scrollTo(0, 0);
+            } else {
+                if (errorContainer) {
+                    errorContainer.style.display = 'none';
+                }
+            }
+        });
+    }
 });

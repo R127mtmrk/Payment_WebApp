@@ -79,7 +79,7 @@
                     <button type="button" class="btn-format" data-cmd="removeFormat">✕</button>
                 </div>
 
-                <div id="message_transact" contenteditable="true" style="border: 1px solid #ccc; min-height: 100px; padding: 10px;"></div>
+                <div id="message_transact" contenteditable="true"></div>
 
                 <input type="hidden" name="message_transact" id="message_input">
             </div>
@@ -93,9 +93,16 @@
     <?php if(isset($_POST['message_transact'])): ?>
     document.addEventListener('DOMContentLoaded', () => {
         const editorRef = document.getElementById('message_transact');
+        const hiddenRef = document.getElementById('message_input');
+
         if (editorRef) {
-            // Attention aux backticks dans le contenu
-            editorRef.innerHTML = `<?= str_replace('`', '\`', $_POST['message_transact']) ?>`;
+            let safeContent = <?= json_encode(strip_tags($_POST['message_transact'], '<b><i><em><strong><font><br><p><span><div>')) ?>;
+
+            editorRef.innerHTML = safeContent;
+
+            if (hiddenRef) {
+                hiddenRef.value = safeContent;
+            }
         }
     });
     <?php endif; ?>
