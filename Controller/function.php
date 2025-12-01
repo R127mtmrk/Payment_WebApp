@@ -24,6 +24,7 @@ function requireLogin(): void{
         exit();
     }
 }
+
 function redirectIfAdmin(): void{
     if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
         header('Location: dashboard.php');
