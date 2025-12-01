@@ -25,12 +25,17 @@ function InsertTransaction($idSender, $usernameReceiver, $sumTransaction, $idCar
     global $pdo;
 
     $Receiver = SelectUser($usernameReceiver);
+
     if (!$Receiver) {
         return "Le destinataire n'existe pas.";
     }
 
     if (isset($Receiver['is_active']) && (int)$Receiver['is_active'] === 0) {
         return "Ce destinataire a clôturé son compte. Transaction impossible.";
+    }
+
+    if (isset($Receiver['role_user']) && (int)$Receiver['role_user'] === 1) {
+        return "Action non autorisée : Impossible d'envoyer de l'argent à un administrateur.";
     }
 
     if (!CheckCardOwner($idCard, $idSender)) {
@@ -72,8 +77,7 @@ function InsertCard($user, $numCard, $expirationDate): bool {
         try {
             $iv = random_bytes($ivlen);
         } catch (Exception $e) {
-            error_log("Erreur critique : Impossible de générer un IV sécurisé.");
-            error_log($e->getMessage());
+            error_log("Erreur critique : Impossible de générer un IV sécurisé. " . $e->getMessage());
             return false;
         }
 
@@ -86,7 +90,6 @@ function InsertCard($user, $numCard, $expirationDate): bool {
 
         $ivHex = bin2hex($iv);
         $lastFourDigits = substr($numCard, -4);
-
         $firstFourDigits = substr($numCard, 0, 4);
 
         $sql = "INSERT INTO Debit_Cards (id_user_card, num_card, first_digits, expiration_date, pan_encrypted, pan_iv) 
