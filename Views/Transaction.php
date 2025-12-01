@@ -71,12 +71,23 @@
             <div class="form-group">
                 <label>Message</label>
 
-                <div class="toolbar" id="richTextToolbar" style="margin-bottom: 5px;">
-                    <button type="button" class="btn-format" data-cmd="bold"><b>G</b></button>
-                    <button type="button" class="btn-format" data-cmd="italic"><i>I</i></button>
-                    <button type="button" class="btn-format" data-cmd="foreColor" data-val="#e90000" style="color:red">A</button>
-                    <button type="button" class="btn-format" data-cmd="foreColor" data-val="#2277eb" style="color:blue">A</button>
-                    <button type="button" class="btn-format" data-cmd="removeFormat">✕</button>
+                <div class="toolbar" id="richTextToolbar" style="margin-bottom: 5px; display: flex; gap: 4px; flex-wrap: wrap;">
+                    <button type="button" class="btn-format" data-cmd="bold" title="Gras"><b>G</b></button>
+                    <button type="button" class="btn-format" data-cmd="italic" title="Italique"><i>I</i></button>
+
+                    <span style="border-left: 1px solid #ccc; margin: 0 5px;"></span>
+
+                    <button type="button" class="btn-format" data-cmd="foreColor" data-val="#000000" style="color:black; font-weight:bold;" title="Noir">A</button>
+
+                    <button type="button" class="btn-format" data-cmd="foreColor" data-val="#e90000" style="color:#e90000; font-weight:bold;" title="Rouge">A</button>
+                    <button type="button" class="btn-format" data-cmd="foreColor" data-val="#ff8c00" style="color:#ff8c00; font-weight:bold;" title="Orange">A</button>
+                    <button type="button" class="btn-format" data-cmd="foreColor" data-val="#229d24" style="color:#229d24; font-weight:bold;" title="Vert">A</button>
+                    <button type="button" class="btn-format" data-cmd="foreColor" data-val="#2277eb" style="color:#2277eb; font-weight:bold;" title="Bleu">A</button>
+                    <button type="button" class="btn-format" data-cmd="foreColor" data-val="#800080" style="color:#800080; font-weight:bold;" title="Violet">A</button>
+
+                    <span style="border-left: 1px solid #ccc; margin: 0 5px;"></span>
+
+                    <button type="button" class="btn-format" data-cmd="removeFormat" title="Tout effacer (Retour à la normale)">✕</button>
                 </div>
 
                 <div id="message_transact" contenteditable="true"></div>
@@ -96,7 +107,22 @@
         const hiddenRef = document.getElementById('message_input');
 
         if (editorRef) {
-            let safeContent = <?= json_encode(strip_tags($_POST['message_transact'], '<b><i><em><strong><font><br><p><span><div>')) ?>;
+            <?php
+            $rawContent = strip_tags($_POST['message_transact'], '<b><i><em><strong><br><p><span><div>');
+
+            $safeJson = '""';
+
+            try {
+                $safeJson = json_encode(
+                    $rawContent,
+                    JSON_THROW_ON_ERROR | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+                );
+            } catch (JsonException $e) {
+
+            }
+            ?>
+
+            let safeContent = <?= $safeJson ?>;
 
             editorRef.innerHTML = safeContent;
 
