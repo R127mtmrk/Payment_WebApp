@@ -1,2 +1,5 @@
 <?php
-const ENCRYPTION_KEY= 'caff668d230c4ac2c4b790e04b9c8911137bc31f3d2913dd258e5213e1e1ea58';
+// Charge la configuration principale si elle n'est pas déjà chargée
+if (!defined('ENCRYPTION_KEY')) {
+    require_once __DIR__ . '/../../config.php';
+}

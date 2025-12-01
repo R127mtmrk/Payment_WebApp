@@ -8,7 +8,6 @@ CREATE TABLE Users (
                        psd_user VARCHAR(50) NOT NULL UNIQUE,
                        mdp_user VARCHAR(255) NOT NULL,
                        email_user VARCHAR(100) NOT NULL UNIQUE,
-                       id_card_user INT UNSIGNED,
                        role_user BOOLEAN NOT NULL DEFAULT 0,
                        is_active BOOLEAN NOT NULL DEFAULT 1,
                        PRIMARY KEY (id_user)
@@ -42,6 +41,3 @@ CREATE TABLE Transac (
                          FOREIGN KEY (id_card_used) REFERENCES Debit_Cards(id_card),
                          FOREIGN KEY (id_receiver) REFERENCES Users(id_user)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
-
--- crée un admin
-UPDATE Users SET role_user = 1 WHERE psd_user = 'admin';
