@@ -82,15 +82,22 @@ function SelectUserTransactions(int $id_user): array {
     if ($id_user) {
         $sql = "SELECT t.*, 
                        d.num_card, d.expiration_date, d.pan_encrypted, d.pan_iv,
-                       u.psd_user AS receiver_name
+                       s.psd_user AS sender_name,
+                       r.psd_user AS receiver_name
                 FROM Transac t
                 LEFT JOIN Debit_Cards d ON t.id_card_used = d.id_card
-                LEFT JOIN Users u ON t.id_receiver = u.id_user
-                WHERE t.id_sender = :id_user
+                LEFT JOIN Users s ON t.id_sender = s.id_user
+                LEFT JOIN Users r ON t.id_receiver = r.id_user
+                
+                WHERE t.id_sender = :sender OR t.id_receiver = :receiver
+                
                 ORDER BY t.date_transac DESC";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+
+        $stmt->bindValue(':sender', $id_user, PDO::PARAM_INT);
+        $stmt->bindValue(':receiver', $id_user, PDO::PARAM_INT);
+
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

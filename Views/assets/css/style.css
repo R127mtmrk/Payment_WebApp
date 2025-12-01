@@ -126,6 +126,7 @@ select {
     transition: border-color 0.3s ease;
     outline: none;
     box-sizing: border-box;
+    margin-bottom: 5px;
 }
 
 input:focus,
@@ -538,7 +539,7 @@ button[name="btn_message"]:hover {
 }
 
 /* =========================================
-   9. NOTIFICATIONS
+   9. NOTIFICATIONS (TOASTS)
    ========================================= */
 .toast-container {
     position: fixed;
@@ -591,4 +592,70 @@ button[name="btn_message"]:hover {
 .toast.error div:first-child {
     color: #dc3545;
     font-size: 1.2em;
+}
+
+/* =========================================
+   10. DASHBOARD SPECIFIQUE (ELEMENTS MANQUANTS AJOUTÉS)
+   ========================================= */
+
+.balance-card {
+    background: linear-gradient(135deg, #007acc, #005fa3);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 122, 204, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.balance-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.balance-amount {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.transac-type {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.type-received {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.type-sent {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.amount-plus {
+    color: #28a745;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.amount-minus {
+    color: #dc3545;
+    font-weight: 700;
+    font-size: 1.1rem;
 }
