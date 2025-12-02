@@ -39,16 +39,34 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
 else {
     $userId = $_SESSION['id_user'];
 
-    // 1. Récupérer les transactions (Envoyées ET Reçues)
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['refund_id'])) {
+
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            die("Erreur de sécurité (CSRF).");
+        }
+
+        $idTransac = (int)$_POST['refund_id'];
+
+        $transac = SelectTransactionById($idTransac);
+
+        if ($transac && (int)$transac['id_receiver'] === $userId) {
+            $result = MakeRefund($idTransac);
+            if ($result === true) {
+                $successMessage = "Remboursement effectué avec succès.";
+            } else {
+                $errorMessage = $result;
+            }
+        } else {
+            $errorMessage = "Action non autorisée : Vous ne pouvez pas rembourser cette transaction.";
+        }
+    }
+
     $transactions = SelectUserTransactions($userId);
 
-    // 2. INITIALISATION DU SOLDE
     $solde = 0.0;
     $history = [];
 
     foreach ($transactions as $row) {
-
-        // --- CALCUL DU SOLDE ---
         if ((int)$row['id_receiver'] === $userId) {
             $solde += (float)$row['sum_transac'];
         } else {
