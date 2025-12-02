@@ -34,6 +34,10 @@ function InsertTransaction($idSender, $usernameReceiver, $sumTransaction, $idCar
         return "Ce destinataire a clôturé son compte. Transaction impossible.";
     }
 
+    if ((int)$Receiver['id_user'] === $idSender) {
+        return "Vous ne pouvez pas vous envoyer de l'argent à vous-même.";
+    }
+
     if (isset($Receiver['role_user']) && (int)$Receiver['role_user'] === 1) {
         return "Action non autorisée : Impossible d'envoyer de l'argent à un administrateur.";
     }
