@@ -38,7 +38,7 @@
         <div class="balance-card">
             <div class="balance-title">Solde Actuel</div>
             <div class="balance-amount"><?= number_format($solde, 2, ',', ' ') ?> €</div>
-            <!-- l'erreur est ok, car il sai juste pas d'où vient $solde -->
+            <!-- l'erreur est ok, car il sait juste pas d'où vient $solde -->
         </div>
 
         <h3>Historique récent</h3>
@@ -93,11 +93,11 @@
 
                             <td class="message-content">
                                 <?php
-                                $allowed_tags = '<b><i><em><strong><br><p><span><div>';
+                                $allowed_tags = '<b><i><em><style><strong><br><p><span><div>';
                                 if (!empty($transac['msg_transac'])) {
                                     echo strip_tags($transac['msg_transac'], $allowed_tags);
                                 } else {
-                                    echo '<span style="color:#ccc; font-style:italic;">Aucun message</span>';
+                                    echo '<span class="aucun_message">Aucun message</span>';
                                 }
                                 ?>
                             </td>
@@ -137,11 +137,11 @@
         <p class="modal-text">
             Voulez-vous renvoyer l'argent à l'expéditeur ?<br>
             <br>
-            <small style="color:#dc3545; font-weight:bold;">Le montant sera débité de votre solde.</small>
+            <small class="irreversible">Le montant sera débité de votre solde.</small>
         </p>
         <div class="modal-actions">
             <button class="btn-cancel" onclick="closeRefundModal()">Annuler</button>
-            <form method="POST" action="" style="display:contents;">
+            <form method="POST" action="" class="confirmer_remboursemnt">
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                 <input type="hidden" name="refund_id" id="refundIdInput">
                 <button type="submit" class="btn-confirm">Confirmer</button>

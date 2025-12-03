@@ -293,8 +293,7 @@ button[name="btn_message"]:hover {
     display: none;
 }
 
-#irréversible,
-#irreversible {
+.irreversible {
     color: #dc3545;
     font-weight: bold;
 }
@@ -375,11 +374,12 @@ button[name="btn_message"]:hover {
 
 .message-content {
     font-size: 0.9rem;
-    color: #555;
-    font-style: italic;
     line-height: 1.4;
     min-width: 200px;
-}
+     font-style: normal;
+     font-weight: normal;
+     color: black;
+ }
 
 .empty-row {
     text-align: center;
@@ -539,7 +539,7 @@ button[name="btn_message"]:hover {
 }
 
 /* =========================================
-   9. NOTIFICATIONS (TOASTS)
+   9. NOTIFICATIONS
    ========================================= */
 .toast-container {
     position: fixed;
@@ -658,4 +658,20 @@ button[name="btn_message"]:hover {
     color: #dc3545;
     font-weight: 700;
     font-size: 1.1rem;
+}
+
+.aucun_message{
+    color: black;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    min-width: 200px;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.message-content b, .message-content strong {
+    font-weight: bold;
+}
+.message-content i, .message-content em {
+    font-style: italic;
 }

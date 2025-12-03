@@ -50,11 +50,13 @@
                             <td><?= htmlspecialchars($t['sender_name'] ?? 'Système') ?></td>
                             <td><?= htmlspecialchars($t['receiver_name'] ?? 'Inconnu') ?></td>
                             <td><?= !empty($t['num_card']) ? '**** ' . htmlspecialchars($t['num_card']) : '--' ?></td>
-                            <td>
+                            <td class="message-content">
                                 <?php
-                                $allowed = '<b><i><em><strong><br><p><span><div>';
+                                $allowed = '<b><i><em><strong><style><br><p><span><div>';
                                 if (!empty($t['msg_transac'])){
                                     echo strip_tags($t['msg_transac'], $allowed);
+                                }else {
+                                    echo '<span class="aucun_message">Aucun message</span>';
                                 }
                                 ?>
                             </td>
@@ -86,12 +88,12 @@
         <p class="modal-text">
             Voulez-vous vraiment rembourser cette transaction ?
             <br><br>
-            <small id="irreversible">Cette action est irréversible.</small>
+            <small class="irreversible">Cette action est irréversible.</small>
         </p>
         <div class="modal-actions">
             <button class="btn-cancel" onclick="closeRefundModal()">Annuler</button>
 
-            <form method="POST" action="" id="confirmer_remboursemnt">
+            <form method="POST" action="" class="confirmer_remboursemnt">
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                 <input type="hidden" name="refund_id" id="refundIdInput">
                 <button type="submit" class="btn-confirm">Confirmer</button>
